@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import ScrollToTop from '@components/ui/ScrollToTop'
 import WhatsAppButton from '@components/ui/WhatsAppButton'
+import { useTheme } from '@hooks/useTheme'
 
 /**
  * Layout — wraps every page.
@@ -13,6 +14,7 @@ import WhatsAppButton from '@components/ui/WhatsAppButton'
  */
 const Layout = () => {
   const { pathname } = useLocation()
+  const { theme, toggleTheme } = useTheme()
 
   // Scroll to top on every page navigation
   useEffect(() => {
@@ -21,7 +23,7 @@ const Layout = () => {
 
   return (
     <div className="site-wrapper">
-      <Navbar />
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main className="site-main" id="main-content">
         <Outlet />
       </main>

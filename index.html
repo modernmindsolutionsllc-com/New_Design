@@ -40,6 +40,23 @@
 
     <!-- ── Theme colour for mobile browsers ── -->
     <meta name="theme-color" content="#F5F4F0" />
+    <script>
+      (function () {
+        var themeKey = 'youragency-theme';
+        var storedTheme = localStorage.getItem(themeKey);
+        var preferredTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        var theme = storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : preferredTheme;
+        var themeColor = theme === 'dark' ? '#111827' : '#F5F4F0';
+
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+
+        var metaTheme = document.querySelector('meta[name="theme-color"]');
+        if (metaTheme) {
+          metaTheme.setAttribute('content', themeColor);
+        }
+      })();
+    </script>
 
     <!-- ── Canonical URL ── -->
     <link rel="canonical" href="https://youragency.com/" />

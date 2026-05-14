@@ -8,11 +8,14 @@
 
 /* ── Colour Tokens ─────────────────────────────────────────────────────────── */
 :root {
+  color-scheme: light;
+
   /* Backgrounds */
   --color-bg:          #F5F4F0;   /* Warm light gray — main page background */
   --color-bg-white:    #FFFFFF;   /* Pure white — cards, sections */
   --color-bg-subtle:   #ECEAE4;   /* Slightly darker warm gray — alternate sections */
   --color-bg-dark:     #1E1E2E;   /* Deep charcoal — footer, dark accents */
+  --color-bg-elevated: rgba(245, 244, 240, 0.95);
 
   /* Text */
   --color-text-primary:   #1E1E2E;  /* Deep charcoal — headings, important text */
@@ -93,6 +96,37 @@
   --section-py:    clamp(4rem, 8vw, 7rem);
 }
 
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --color-bg:          #111827;
+  --color-bg-white:    #182132;
+  --color-bg-subtle:   #223047;
+  --color-bg-dark:     #0b1220;
+  --color-bg-elevated: rgba(17, 24, 39, 0.92);
+
+  --color-text-primary:   #F8FAFC;
+  --color-text-secondary: #CBD5E1;
+  --color-text-muted:     #94A3B8;
+  --color-text-inverse:   #F8FAFC;
+
+  --color-gold:         #E2BC63;
+  --color-gold-light:   #F0CE7F;
+  --color-gold-dark:    #C8993B;
+  --color-gold-subtle:  rgba(226, 188, 99, 0.12);
+  --color-gold-border:  rgba(226, 188, 99, 0.35);
+
+  --color-border:       rgba(148, 163, 184, 0.18);
+  --color-border-dark:  rgba(255,255,255,0.1);
+
+  --shadow-sm:   0 2px 10px rgba(2, 6, 23, 0.35);
+  --shadow-md:   0 8px 28px rgba(2, 6, 23, 0.4);
+  --shadow-lg:   0 16px 48px rgba(2, 6, 23, 0.48);
+  --shadow-gold: 0 8px 28px rgba(226, 188, 99, 0.18);
+  --shadow-card: 0 8px 30px rgba(2, 6, 23, 0.35);
+  --shadow-card-hover: 0 18px 56px rgba(2, 6, 23, 0.5);
+}
+
 /* ── Reset ─────────────────────────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -104,6 +138,7 @@ html {
   font-size: 16px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  background-color: var(--color-bg);
 }
 
 body {
@@ -116,6 +151,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+  min-height: 100vh;
 }
 
 /* ── Typography Base ──────────────────────────────────────────────────────── */
@@ -164,6 +204,7 @@ button {
 input, textarea, select {
   font-family: var(--font-body);
   font-size: var(--text-base);
+  color: var(--color-text-primary);
 }
 
 /* ── Layout Utilities ─────────────────────────────────────────────────────── */

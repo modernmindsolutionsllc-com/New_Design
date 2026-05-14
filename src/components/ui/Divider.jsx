@@ -11,16 +11,10 @@
 const Divider = ({
     align = 'left',
     width = '48px',
-    spacing = 'md',
-    color = 'gold',
-    className = '',
+  spacing = 'md',
+  color = 'gold',
+  className = '',
   }) => {
-    const marginMap = {
-      left:   'auto auto auto 0',
-      center: 'auto',
-      right:  '0 0 0 auto',
-    }
-  
     const spacingMap = {
       sm: 'var(--space-3) 0',
       md: 'var(--space-5) 0',

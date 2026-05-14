@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X, ChevronDown, Moon, Sun } from 'lucide-react'
 import { NAV_LINKS, COMPANY_NAME } from '@utils/constants'
 import { lockBodyScroll, unlockBodyScroll } from '@utils/scrollHelpers'
 import { useScrollPosition } from '@hooks/useScrollPosition'
 
-const Navbar = () => {
+const Navbar = ({ theme, toggleTheme }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const { scrollY } = useScrollPosition()
@@ -35,6 +35,9 @@ const Navbar = () => {
     path === '/'
       ? location.pathname === '/'
       : location.pathname.startsWith(path)
+
+  const isDarkTheme = theme === 'dark'
+  const themeLabel = isDarkTheme ? 'Switch to light mode' : 'Switch to dark mode'
 
   return (
     <>
@@ -109,10 +112,20 @@ const Navbar = () => {
 
           {/* ── CTA + Hamburger ── */}
           <div className="navbar__right">
+            <button
+              type="button"
+              className="theme-toggle"
+              onClick={toggleTheme}
+              aria-label={themeLabel}
+              title={themeLabel}
+            >
+              {isDarkTheme ? <Sun size={17} /> : <Moon size={17} />}
+            </button>
             <Link to="/start-project" className="navbar__cta">
               Start a Project
             </Link>
             <button
+              type="button"
               className="navbar__hamburger"
               onClick={toggleMobile}
               aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
@@ -164,6 +177,15 @@ const Navbar = () => {
             </nav>
 
             <div className="mobile-menu__footer">
+              <button
+                type="button"
+                className="mobile-menu__theme-toggle"
+                onClick={toggleTheme}
+                aria-label={themeLabel}
+              >
+                {isDarkTheme ? <Sun size={16} /> : <Moon size={16} />}
+                <span>{isDarkTheme ? 'Light mode' : 'Dark mode'}</span>
+              </button>
               <Link
                 to="/start-project"
                 className="mobile-menu__cta"
@@ -207,7 +229,7 @@ style.textContent = `
   transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .navbar--scrolled {
-  background: rgba(245, 244, 240, 0.95);
+  background: var(--color-bg-elevated);
   border-bottom-color: var(--color-border);
   box-shadow: var(--shadow-sm);
   backdrop-filter: blur(12px);
@@ -322,6 +344,24 @@ style.textContent = `
 
 /* ── Right side ──────────────────────────────────────────────────────────── */
 .navbar__right { display: flex; align-items: center; gap: var(--space-4); flex-shrink: 0; }
+.theme-toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-white);
+  color: var(--color-text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+.theme-toggle:hover {
+  border-color: var(--color-gold-border);
+  color: var(--color-gold);
+  transform: translateY(-1px);
+}
 .navbar__cta {
   font-family: var(--font-body);
   font-size: var(--text-sm); font-weight: 700;
@@ -389,7 +429,29 @@ style.textContent = `
   transition: var(--transition-base);
 }
 .mobile-menu__sublink:hover { color: var(--color-gold); background: var(--color-gold-subtle); }
-.mobile-menu__footer { padding-top: var(--space-8); }
+.mobile-menu__footer {
+  padding-top: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.mobile-menu__theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+  transition: var(--transition-base);
+}
+.mobile-menu__theme-toggle:hover {
+  border-color: var(--color-gold-border);
+  color: var(--color-gold);
+}
 .mobile-menu__cta {
   display: block; text-align: center;
   background: var(--color-gold); color: var(--color-bg-dark);
