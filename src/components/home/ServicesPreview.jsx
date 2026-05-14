@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer'
 import { Link } from 'react-router-dom'
 import {
   Code2, Smartphone, BrainCircuit, Palette,
-  Cloud, Settings2, ArrowRight, CheckCircle2, Calendar
+  Cloud, Settings2, ArrowRight, CheckCircle2
 } from 'lucide-react'
 import SectionHeading from '@components/ui/SectionHeading'
 import { SERVICES } from '@data/services'

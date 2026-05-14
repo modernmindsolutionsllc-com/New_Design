@@ -3,7 +3,7 @@ import { Linkedin, Github, Twitter, Instagram, Mail, Phone, MapPin } from 'lucid
 import {
   COMPANY_NAME, COMPANY_TAGLINE,
   CONTACT_EMAIL, CONTACT_PHONE, COMPANY_ADDRESS,
-  SOCIAL_LINKS, WHATSAPP_URL, NAV_LINKS, SERVICES
+  SOCIAL_LINKS, WHATSAPP_URL
 } from '@utils/constants'
 
 const SERVICES_LINKS = [

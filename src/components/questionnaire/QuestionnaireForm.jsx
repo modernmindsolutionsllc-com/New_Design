@@ -56,7 +56,7 @@ const QuestionnaireForm = () => {
   const handleSubmit = async () => {
     // Validate step 4 first via the hook
     setDirection(1)
-    const valid = next() // next() validates step 4 before advancing — but we're on the last step
+    next() // next() validates step 4 before advancing, but we're on the last step
     // Since next() won't advance past totalSteps, we manually check errors
     // by calling the Formspree submit directly if no errors
     const payload = serializeFormData(formData)

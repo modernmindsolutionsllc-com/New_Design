@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import {
   ClipboardList, FileText, PenTool,
-  Code2, TestTube2, Rocket, HeartHandshake
+  Code2, TestTube2, Rocket
 } from 'lucide-react'
 import SectionHeading from '@components/ui/SectionHeading'
 import { FADE_UP, STAGGER_CONTAINER } from '@utils/constants'

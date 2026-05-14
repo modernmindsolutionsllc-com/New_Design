@@ -5,7 +5,7 @@
 //  Used to animate sections as the user scrolls down.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useEffect, useRef, useState } from 'react'
+import { createRef, useEffect, useRef, useState } from 'react'
 
 /**
  * Returns a ref and a boolean `isVisible`.
@@ -85,7 +85,14 @@ export const useScrollAnimation = ({
  * ))
  */
 export const useScrollAnimationList = (count, options = {}) => {
-  const refs = Array.from({ length: count }, () => useRef(null))
+  const refsRef = useRef([])
+  if (refsRef.current.length !== count) {
+    refsRef.current = Array.from(
+      { length: count },
+      (_, index) => refsRef.current[index] || createRef()
+    )
+  }
+  const refs = refsRef.current
   const [visibleStates, setVisibleStates] = useState(
     Array.from({ length: count }, () => false)
   )
@@ -93,7 +100,14 @@ export const useScrollAnimationList = (count, options = {}) => {
   const { threshold = 0.1, rootMargin = '0px 0px -40px 0px', triggerOnce = true } = options
 
   useEffect(() => {
-    const observers = refs.map((ref, index) => {
+    setVisibleStates((prev) =>
+      Array.from({ length: count }, (_, index) => prev[index] || false)
+    )
+  }, [count])
+
+  useEffect(() => {
+    const activeRefs = refsRef.current
+    const observers = activeRefs.map((ref, index) => {
       const element = ref.current
       if (!element) return null
 
@@ -125,12 +139,12 @@ export const useScrollAnimationList = (count, options = {}) => {
 
     return () => {
       observers.forEach((observer, index) => {
-        if (observer && refs[index].current) {
-          observer.unobserve(refs[index].current)
+        if (observer && activeRefs[index].current) {
+          observer.unobserve(activeRefs[index].current)
         }
       })
     }
-  }, [threshold, rootMargin, triggerOnce])
+  }, [threshold, rootMargin, triggerOnce, count])
 
   return refs.map((ref, index) => ({
     ref,

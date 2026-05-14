@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { CheckCircle2, ArrowRight, MessageCircle } from 'lucide-react'
-import { WHATSAPP_URL, COMPANY_NAME, STAGGER_CONTAINER, FADE_UP } from '@utils/constants'
+import { WHATSAPP_URL, STAGGER_CONTAINER, FADE_UP } from '@utils/constants'
 
 /**
  * SuccessScreen — shown after successful form submission.

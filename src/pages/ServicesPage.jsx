@@ -5,7 +5,6 @@ import {
   Code2, Smartphone, BrainCircuit, Palette,
   Cloud, Settings2, CheckCircle2, ArrowRight
 } from 'lucide-react'
-import SectionHeading from '@components/ui/SectionHeading'
 import CTABanner from '@components/home/CTABanner'
 import { SERVICES } from '@data/services'
 import { FADE_UP, STAGGER_CONTAINER } from '@utils/constants'
