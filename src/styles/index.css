@@ -4,34 +4,34 @@
    Change a variable once — it updates everywhere.
 ───────────────────────────────────────────────────────────────────────────── */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap');
 
 /* ── Colour Tokens ─────────────────────────────────────────────────────────── */
 :root {
   color-scheme: light;
 
   /* Backgrounds */
-  --color-bg:          #F5F4F0;   /* Warm light gray — main page background */
-  --color-bg-white:    #FFFFFF;   /* Pure white — cards, sections */
-  --color-bg-subtle:   #ECEAE4;   /* Slightly darker warm gray — alternate sections */
-  --color-bg-dark:     #1E1E2E;   /* Deep charcoal — footer, dark accents */
-  --color-bg-elevated: rgba(245, 244, 240, 0.95);
+  --color-bg:          #F7F9FF;
+  --color-bg-white:    #FFFFFF;
+  --color-bg-subtle:   #EAF1FF;
+  --color-bg-dark:     #0B1228;
+  --color-bg-elevated: rgba(247, 249, 255, 0.95);
 
   /* Text */
-  --color-text-primary:   #1E1E2E;  /* Deep charcoal — headings, important text */
-  --color-text-secondary: #5A5A6E;  /* Medium gray — body text, descriptions */
-  --color-text-muted:     #9A9AAB;  /* Light gray — placeholders, captions */
-  --color-text-inverse:   #F5F4F0;  /* Light text on dark backgrounds */
+  --color-text-primary:   #0F172A;
+  --color-text-secondary: #334155;
+  --color-text-muted:     #64748B;
+  --color-text-inverse:   #F8FAFC;
 
   /* Gold Accent */
-  --color-gold:         #C9A84C;   /* Primary gold accent */
-  --color-gold-light:   #E8CC7A;   /* Lighter gold — hover states, tints */
-  --color-gold-dark:    #A8872E;   /* Darker gold — pressed states */
-  --color-gold-subtle:  #F9F3E3;   /* Very light gold tint — card hover bg */
-  --color-gold-border:  rgba(201, 168, 76, 0.25); /* Semi-transparent gold for borders */
+  --color-gold:         #22B6FF;
+  --color-gold-light:   #6AD0FF;
+  --color-gold-dark:    #1498E2;
+  --color-gold-subtle:  rgba(34, 182, 255, 0.12);
+  --color-gold-border:  rgba(34, 182, 255, 0.35);
 
   /* Borders & Dividers */
-  --color-border:       #E2E0DA;
+  --color-border:       #DCE4FF;
   --color-border-dark:  rgba(255,255,255,0.1);
 
   /* Status */
@@ -40,8 +40,8 @@
   --color-warning:  #E6A817;
 
   /* ── Typography ─────────────────────────────────────────────────────────── */
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-display: 'Outfit', 'Segoe UI', sans-serif;
+  --font-body:    'Manrope', 'Segoe UI', sans-serif;
 
   --text-xs:   0.75rem;   /* 12px */
   --text-sm:   0.875rem;  /* 14px */
@@ -77,12 +77,12 @@
   --radius-full: 9999px;
 
   /* ── Shadows ────────────────────────────────────────────────────────────── */
-  --shadow-sm:   0 2px 8px rgba(30, 30, 46, 0.06);
-  --shadow-md:   0 4px 24px rgba(30, 30, 46, 0.08);
-  --shadow-lg:   0 8px 40px rgba(30, 30, 46, 0.12);
-  --shadow-gold: 0 8px 32px rgba(201, 168, 76, 0.20);
-  --shadow-card: 0 4px 24px rgba(30, 30, 46, 0.07);
-  --shadow-card-hover: 0 16px 48px rgba(201, 168, 76, 0.14);
+  --shadow-sm:   0 2px 8px rgba(15, 23, 42, 0.06);
+  --shadow-md:   0 8px 24px rgba(45, 103, 248, 0.1);
+  --shadow-lg:   0 14px 40px rgba(15, 23, 42, 0.14);
+  --shadow-gold: 0 8px 32px rgba(245, 180, 0, 0.24);
+  --shadow-card: 0 6px 24px rgba(15, 23, 42, 0.08);
+  --shadow-card-hover: 0 16px 48px rgba(45, 103, 248, 0.18);
 
   /* ── Transitions ─────────────────────────────────────────────────────────── */
   --transition-fast:   all 0.15s ease;
@@ -99,10 +99,10 @@
 :root[data-theme='dark'] {
   color-scheme: dark;
 
-  --color-bg:          #111827;
-  --color-bg-white:    #182132;
-  --color-bg-subtle:   #223047;
-  --color-bg-dark:     #0b1220;
+  --color-bg:          #060B1C;
+  --color-bg-white:    #181D35;
+  --color-bg-subtle:   #101831;
+  --color-bg-dark:     #050A19;
   --color-bg-elevated: rgba(17, 24, 39, 0.92);
 
   --color-text-primary:   #F8FAFC;
@@ -110,13 +110,13 @@
   --color-text-muted:     #94A3B8;
   --color-text-inverse:   #F8FAFC;
 
-  --color-gold:         #E2BC63;
-  --color-gold-light:   #F0CE7F;
-  --color-gold-dark:    #C8993B;
-  --color-gold-subtle:  rgba(226, 188, 99, 0.12);
-  --color-gold-border:  rgba(226, 188, 99, 0.35);
+  --color-gold:         #22B6FF;
+  --color-gold-light:   #6AD0FF;
+  --color-gold-dark:    #1498E2;
+  --color-gold-subtle:  rgba(34, 182, 255, 0.16);
+  --color-gold-border:  rgba(34, 182, 255, 0.38);
 
-  --color-border:       rgba(148, 163, 184, 0.18);
+  --color-border:       rgba(147, 197, 253, 0.22);
   --color-border-dark:  rgba(255,255,255,0.1);
 
   --shadow-sm:   0 2px 10px rgba(2, 6, 23, 0.35);

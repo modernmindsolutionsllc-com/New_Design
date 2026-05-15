@@ -12,7 +12,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const FORMSPREE_ENDPOINT =
-  import.meta.env.VITE_FORMSPREE_ENDPOINT || 'https://formspree.io/f/YOUR_FORM_ID'
+  import.meta.env.VITE_FORMSPREE_ENDPOINT || 'https://formspree.io/f/mqenrkpq'
 
 /**
  * Formspree special fields config.
@@ -24,7 +24,7 @@ export const FORMSPREE_ENDPOINT =
  * @returns {Object}
  */
 export const getFormspreeMetaFields = (clientName, clientEmail) => ({
-  _subject: `New Project Inquiry from ${clientName || 'Website Visitor'}`,
+  _subject: `New Project Request from ${clientName || 'Website Visitor'}`,
   _replyto: clientEmail || '',
   // Redirect after submission is handled in React (SuccessScreen),
   // so we disable Formspree's default redirect

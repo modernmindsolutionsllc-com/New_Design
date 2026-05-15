@@ -6,18 +6,18 @@ import { STAGGER_CONTAINER, FADE_UP } from '@utils/constants'
 const VALUE_PROPS = [
   {
     icon: MessageCircle,
-    title: 'Plain Communication',
-    desc: 'No tech-speak. We explain everything in language that makes sense to you — whether you\'re a developer or a first-time founder.',
+    title: 'Beginner-Friendly Process',
+    desc: 'Clear language, guided steps, and no technical confusion for first-time clients.',
   },
   {
     icon: Clock,
-    title: 'On-Time Delivery',
-    desc: 'We set realistic timelines and stick to them. You\'ll always know exactly what\'s happening and what\'s next.',
+    title: 'Fast Delivery Cycles',
+    desc: 'Agile execution with quick iterations, demos, and milestone-based progress.',
   },
   {
     icon: ShieldCheck,
-    title: 'Quality You Can See',
-    desc: 'Clean code, beautiful design, and software that works on day one. We don\'t ship until it\'s genuinely ready.',
+    title: 'Reliable Partnership',
+    desc: 'Transparent communication, practical recommendations, and long-term support.',
   },
 ]
 
@@ -72,12 +72,15 @@ style.textContent = `
 }
 .value-prop__icon-wrap {
   flex-shrink: 0;
-  width: 48px; height: 48px;
+  width: 48px;
+  height: 48px;
   border-radius: var(--radius-md);
   background: var(--color-gold-subtle);
   border: 1px solid var(--color-gold-border);
   color: var(--color-gold);
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .value-prop__title {
   font-family: var(--font-body);
@@ -92,7 +95,10 @@ style.textContent = `
   line-height: 1.65;
 }
 @media (max-width: 768px) {
-  .value-props__grid { grid-template-columns: 1fr; gap: var(--space-8); }
+  .value-props__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
 }
 `
 if (!document.head.querySelector('[data-vp-styles]')) {

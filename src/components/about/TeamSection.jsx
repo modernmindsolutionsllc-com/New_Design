@@ -12,9 +12,9 @@ const TeamSection = () => {
     <section className="team section section--gray">
       <div className="container">
         <SectionHeading
-          tag="The Team"
-          heading="The People Behind Your Project"
-          subline="Small, focused, and deeply invested in the work. Every project is handled by senior people — not passed to juniors."
+          tag="Our Team"
+          heading="Execution Team You Can Count On"
+          subline="A cross-functional team of strategists, designers, and engineers focused on business impact."
           align="center"
         />
 
@@ -75,7 +75,8 @@ export default TeamSection
 const style = document.createElement('style')
 style.textContent = `
 .team__grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: minmax(240px, 360px);
+  justify-content: center;
   gap: var(--space-6); margin-top: var(--space-12);
 }
 .team-card {
@@ -144,7 +145,7 @@ style.textContent = `
   border-color: var(--color-gold-border);
   color: var(--color-gold);
 }
-@media (max-width: 1024px) { .team__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1024px) { .team__grid { grid-template-columns: minmax(220px, 360px); } }
 @media (max-width: 560px) { .team__grid { grid-template-columns: 1fr; } }
 `
 if (!document.head.querySelector('[data-team-styles]')) {

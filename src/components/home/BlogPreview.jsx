@@ -15,9 +15,9 @@ const BlogPreview = () => {
       <div className="container">
         <div className="blog-preview__header">
           <SectionHeading
-            tag="Helpful Reads"
-            heading="For Business Owners, Not Just Developers"
-            subline="No tech jargon — practical guides to help you make smarter software decisions."
+            tag="Insights"
+            heading="Ideas, Product, and Growth"
+            subline="Simple explanations for founders and teams planning digital products."
           />
           <Link to="/blog" className="btn btn--ghost blog-preview__all-link">
             Read All Articles <ArrowRight size={16} />
@@ -36,7 +36,7 @@ const BlogPreview = () => {
               <div className="blog-card__top">
                 <Badge variant="gold">{category}</Badge>
                 <span className="blog-card__date">
-                  {new Date(date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  {new Date(date).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
                 </span>
               </div>
               <h3 className="blog-card__title">{title}</h3>
@@ -115,3 +115,4 @@ if (!document.head.querySelector('[data-blog-styles]')) {
   style.setAttribute('data-blog-styles', '')
   document.head.appendChild(style)
 }
+

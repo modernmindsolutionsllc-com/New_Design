@@ -11,16 +11,16 @@ import { useInView } from 'react-intersection-observer'
 // ─────────────────────────────────────────────────────────────────────────────
 
 const CLIENT_NAMES = [
-  'NourishBox',
-  'FinTrack',
-  'Artisaana',
-  'MediCare Plus',
-  'EduSpark',
-  'LogiPro',
-  'GreenHarvest',
-  'SwiftPay',
-  'BuildRight',
-  'TalentFlow',
+  'Web Development',
+  'Mobile Apps',
+  'AI & Automation',
+  'UI/UX Design',
+  'Oracle Fusion HCM',
+  'Managed Services',
+  'Cloud Deployments',
+  'Startup Launches',
+  'Enterprise Solutions',
+  'Product Teams',
 ]
 
 // Duplicate so the CSS scroll loop is perfectly seamless
@@ -43,7 +43,7 @@ const TrustStrip = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          Trusted by businesses across industries
+          Solutions built for every stage of business growth
         </motion.p>
       </div>
 

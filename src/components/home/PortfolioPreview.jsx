@@ -23,11 +23,11 @@ const PortfolioPreview = () => {
         <div className="portfolio-preview__header">
           <SectionHeading
             tag="Our Work"
-            heading="Work We're Proud Of"
-            subline="Real projects. Real results. Here's what we've built for clients just like you."
+            heading="Case Studies at a Glance"
+            subline="A quick look at the digital products and platform outcomes we have delivered."
           />
           <Link to="/portfolio" className="btn btn--ghost portfolio-preview__all-link">
-            View All Projects <ArrowRight size={16} />
+            View Full Portfolio <ArrowRight size={16} />
           </Link>
         </div>
 
@@ -62,7 +62,7 @@ const PortfolioPreview = () => {
                 </div>
 
                 <p className="portfolio-card__problem">
-                  <strong>Challenge:</strong> {problem}
+                  <strong>Overview:</strong> {problem}
                 </p>
 
                 <div className="portfolio-card__tags">
@@ -72,7 +72,7 @@ const PortfolioPreview = () => {
                 </div>
 
                 <Link to={`/portfolio`} className="portfolio-card__link">
-                  Read the Story <ArrowRight size={14} />
+                  Learn Details <ArrowRight size={14} />
                 </Link>
               </div>
             </motion.div>
