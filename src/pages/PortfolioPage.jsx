@@ -37,12 +37,11 @@ const PortfolioPage = () => {
           >
             <motion.span className="section-tag" variants={FADE_UP}>Our Work</motion.span>
             <motion.h1 className="page-hero__heading" variants={FADE_UP}>
-              Work We're Proud Of
+              Case Studies & Outcomes
             </motion.h1>
             <div className="gold-divider" />
             <motion.p className="page-hero__sub" variants={FADE_UP}>
-              Real problems solved for real businesses. Every project here represents
-              a client who trusted us — and results that proved it was worth it.
+              Real projects, measurable results, and practical implementation details.
             </motion.p>
           </motion.div>
         </div>
@@ -110,7 +109,7 @@ const PortfolioPage = () => {
                     </div>
 
                     <p className="portfolio-page-card__problem">
-                      <strong>The challenge:</strong> {problem}
+                      <strong>Details:</strong> {problem}
                     </p>
 
                     <div className="portfolio-page-card__tags">
@@ -126,7 +125,7 @@ const PortfolioPage = () => {
 
           {filtered.length === 0 && (
             <div className="portfolio-page__empty">
-              <p>No projects in this category yet. Check back soon!</p>
+              <p>No items in this category yet.</p>
             </div>
           )}
         </div>
@@ -161,9 +160,13 @@ style.textContent = `
   display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6);
 }
 .portfolio-page-card {
-  background: var(--color-bg-white); border: 1px solid var(--color-border);
+  background: #e2e8f0; border: 1px solid var(--color-border);
   border-radius: var(--radius-lg); overflow: hidden;
   transition: var(--transition-slow);
+}
+
+:root[data-theme='dark'] .portfolio-page-card {
+  background: var(--color-bg-white);
 }
 .portfolio-page-card:hover {
   border-color: var(--color-gold-border);
@@ -215,3 +218,5 @@ if (!document.head.querySelector('[data-port-page-styles]')) {
   style.setAttribute('data-port-page-styles', '')
   document.head.appendChild(style)
 }
+
+

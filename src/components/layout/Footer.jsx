@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom'
-import { Instagram, Facebook, Mail, Phone, MapPin } from 'lucide-react'
+import { Instagram, Facebook, Mail, Globe, MapPin } from 'lucide-react'
 import {
   COMPANY_NAME,
   COMPANY_TAGLINE,
   CONTACT_EMAIL,
-  CONTACT_PHONE,
-  COMPANY_ADDRESS,
   SOCIAL_LINKS,
   WHATSAPP_URL,
 } from '@utils/constants'
@@ -92,14 +90,17 @@ const Footer = () => (
             </a>
           </li>
           <li className="footer__contact-item">
-            <Phone size={14} className="footer__contact-icon" />
-            <a href={`tel:${CONTACT_PHONE}`} className="footer__link">
-              {CONTACT_PHONE}
-            </a>
+            <Globe size={14} className="footer__contact-icon" />
+            <span className="footer__contact-text">Modern Mind Solutions LLC</span>
           </li>
           <li className="footer__contact-item">
             <MapPin size={14} className="footer__contact-icon" />
-            <span className="footer__contact-text">{COMPANY_ADDRESS}</span>
+            <div className="footer__location-block">
+              <div className="footer__location-name">Modern Mind Solutions LLC</div>
+              <div className="footer__location-city">Boston, US</div>
+              <div className="footer__location-name">Modern Mind Solutions</div>
+              <div className="footer__location-city">Ahmedabad, Gujarat</div>
+            </div>
           </li>
         </ul>
         <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="footer__whatsapp">
@@ -139,13 +140,14 @@ style.textContent = `
     radial-gradient(circle at 90% 84%, rgba(45, 103, 248, 0.12) 0%, transparent 31%),
     var(--color-bg-dark);
   color: var(--color-text-inverse);
+  margin-top: var(--space-16);
 }
 
 .footer__inner {
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
   gap: var(--space-12);
-  padding-top: var(--space-16);
+  padding-top: var(--space-24);
   padding-bottom: var(--space-16);
 }
 
@@ -243,6 +245,28 @@ style.textContent = `
   gap: var(--space-3);
 }
 
+.footer__location-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.footer__location-name {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: rgba(245, 244, 240, 0.9);
+  font-family: var(--font-body);
+  line-height: 1.4;
+}
+
+.footer__location-city {
+  font-size: var(--text-sm);
+  color: rgba(245, 244, 240, 0.62);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  margin-bottom: 0.35rem;
+}
+
 .footer__contact-icon {
   color: var(--color-gold);
   flex-shrink: 0;
@@ -329,6 +353,7 @@ style.textContent = `
 @media (max-width: 560px) {
   .footer__inner {
     grid-template-columns: 1fr;
+    padding-top: var(--space-20);
   }
 
   .footer__logo-image {

@@ -12,9 +12,9 @@ const TestimonialsSection = () => {
     <section className="testimonials section section--gray" id="testimonials">
       <div className="container">
         <SectionHeading
-          tag="Client Stories"
-          heading="What Our Clients Say"
-          subline="Don't take our word for it — here's what real clients have experienced working with us."
+          tag="TESTIMONIALS"
+          heading="What Clients Say"
+          subline="Hear from the teams we've partnered with."
           align="center"
         />
 
@@ -27,26 +27,18 @@ const TestimonialsSection = () => {
         >
           {TESTIMONIALS.map(({ id, name, role, company, quote, avatar, initials }) => (
             <motion.div key={id} className="testimonial-card" variants={FADE_UP}>
-              {/* Gold quote decoration */}
               <div className="testimonial-card__quote-mark" aria-hidden>"</div>
-
-              {/* Stars */}
               <div className="testimonial-card__stars" aria-label="5 out of 5 stars">
                 {Array(5).fill(null).map((_, i) => (
                   <Star key={i} size={14} fill="currentColor" className="testimonial-card__star" />
                 ))}
               </div>
-
               <p className="testimonial-card__text">{quote}</p>
-
-              {/* Author */}
               <div className="testimonial-card__author">
                 {avatar ? (
                   <img src={avatar} alt={name} className="testimonial-card__avatar" />
                 ) : (
-                  <div className="testimonial-card__avatar testimonial-card__avatar--initials">
-                    {initials}
-                  </div>
+                  <div className="testimonial-card__avatar testimonial-card__avatar--initials">{initials}</div>
                 )}
                 <div>
                   <div className="testimonial-card__name">{name}</div>
@@ -66,17 +58,26 @@ export default TestimonialsSection
 const style = document.createElement('style')
 style.textContent = `
 .testimonials__grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6); margin-top: var(--space-12);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-12);
 }
 .testimonial-card {
-  background: var(--color-bg-white);
+  background: #e2e8f0;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-8);
-  display: flex; flex-direction: column; gap: var(--space-5);
-  position: relative; overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  position: relative;
+  overflow: hidden;
   transition: var(--transition-base);
+}
+
+:root[data-theme='dark'] .testimonial-card {
+  background: var(--color-bg-white);
 }
 .testimonial-card:hover {
   border-color: var(--color-gold-border);
@@ -84,42 +85,60 @@ style.textContent = `
   transform: translateY(-3px);
 }
 .testimonial-card__quote-mark {
-  position: absolute; top: var(--space-4); right: var(--space-6);
-  font-family: var(--font-display); font-size: 6rem;
-  color: var(--color-gold-subtle); line-height: 1; user-select: none;
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-6);
+  font-family: var(--font-display);
+  font-size: 6rem;
+  color: var(--color-gold-subtle);
+  line-height: 1;
+  user-select: none;
 }
 .testimonial-card__stars { display: flex; gap: 2px; }
 .testimonial-card__star { color: var(--color-gold); }
 .testimonial-card__text {
-  font-size: var(--text-base); color: var(--color-text-secondary);
-  line-height: 1.7; font-style: italic; flex: 1;
+  font-size: var(--text-base);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  font-style: italic;
+  flex: 1;
 }
 .testimonial-card__author {
-  display: flex; align-items: center; gap: var(--space-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
   padding-top: var(--space-4);
   border-top: 1px solid var(--color-border);
 }
 .testimonial-card__avatar {
-  width: 44px; height: 44px; border-radius: 50%;
-  object-fit: cover; flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 .testimonial-card__avatar--initials {
   background: var(--color-bg-dark);
   color: var(--color-gold);
-  font-weight: 700; font-size: var(--text-sm);
-  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-body);
 }
 .testimonial-card__name {
-  font-family: var(--font-body); font-size: var(--text-sm);
-  font-weight: 700; color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
 }
 .testimonial-card__role {
-  font-size: var(--text-xs); color: var(--color-gold-dark);
+  font-size: var(--text-xs);
+  color: var(--color-gold-dark);
   font-family: var(--font-body);
 }
 @media (max-width: 900px) { .testimonials__grid { grid-template-columns: 1fr; } }
-@media (max-width: 640px) { .testimonials__grid { grid-template-columns: 1fr; } }
 `
 if (!document.head.querySelector('[data-test-styles]')) {
   style.setAttribute('data-test-styles', '')

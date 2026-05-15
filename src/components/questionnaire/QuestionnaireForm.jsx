@@ -126,7 +126,7 @@ const QuestionnaireForm = () => {
             {formspreeState.submitting ? (
               <><Loader2 size={18} className="questionnaire__spinner" /> Sending...</>
             ) : (
-              <><Send size={16} /> Submit My Project Brief</>
+              <><Send size={16} /> Submit Project Request</>
             )}
           </button>
         ) : (
@@ -279,3 +279,4 @@ if (!document.head.querySelector('[data-qform-styles]')) {
   style.setAttribute('data-qform-styles', '')
   document.head.appendChild(style)
 }
+

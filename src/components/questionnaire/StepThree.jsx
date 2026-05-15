@@ -19,7 +19,7 @@ const StepThree = ({ formData, errors, updateField, clearFieldError }) => (
     <motion.div className="form-step__header" variants={FADE_UP}>
       <h2 className="form-step__title">Timeline & budget</h2>
       <p className="form-step__sub">
-        Honest answers help us give you an accurate proposal. No budget is too small to discuss.
+        Honest answers help us recommend the right scope and delivery plan.
       </p>
     </motion.div>
 
@@ -154,3 +154,5 @@ if (!document.head.querySelector('[data-step3-styles]')) {
   style.setAttribute('data-step3-styles', '')
   document.head.appendChild(style)
 }
+
+

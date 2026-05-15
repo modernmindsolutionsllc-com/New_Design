@@ -95,7 +95,7 @@ export const validateCheckboxGroup = (selectedItems, fieldName = 'Please select 
  */
 export const validateMinLength = (text, minLength = 20) => {
   if (!text || text.trim() === '') {
-    return { valid: false, message: 'Please describe your project.' }
+    return { valid: false, message: 'Please describe your project goals.' }
   }
   if (text.trim().length < minLength) {
     return {
@@ -248,7 +248,7 @@ export const serializeFormData = (formData) => {
     'Services Needed': Array.isArray(formData.serviceTypes)
       ? formData.serviceTypes.join(', ')
       : formData.serviceTypes || '',
-    'Project Description': formData.projectDescription || '',
+    'Support Needs': formData.projectDescription || '',
     'Starting From': formData.startingFrom || '',
     'Features Required': Array.isArray(formData.features)
       ? formData.features.join(', ')
@@ -257,7 +257,7 @@ export const serializeFormData = (formData) => {
     // Step 3
     'Timeline': formData.timeline || '',
     'Budget Range': formData.budget || '',
-    'Worked With Agency Before': formData.workedBefore || 'Not answered',
+    'Worked With Similar Agency Before': formData.workedBefore || 'Not answered',
     'How They Found Us': formData.referralSource || 'Not specified',
 
     // Step 4
@@ -266,7 +266,7 @@ export const serializeFormData = (formData) => {
     'Additional Notes': formData.additionalNotes || 'None',
 
     // Meta
-    '_subject': `New Project Inquiry from ${formData.name || 'Website Visitor'}`,
+    '_subject': `New Project Request from ${formData.name || 'Website Visitor'}`,
     '_replyto': formData.email || '',
   }
 }

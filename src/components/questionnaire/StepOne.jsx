@@ -22,8 +22,8 @@ const StepOne = ({ formData, errors, updateField, clearFieldError }) => (
     animate="visible"
   >
     <motion.div className="form-step__header" variants={FADE_UP}>
-      <h2 className="form-step__title">First, tell us about yourself</h2>
-      <p className="form-step__sub">No technical knowledge needed — just your basic details.</p>
+      <h2 className="form-step__title">First, tell us about you</h2>
+      <p className="form-step__sub">No clinical language needed, just your basic details.</p>
     </motion.div>
 
     <motion.div className="form-step__fields" variants={FADE_UP}>
@@ -96,7 +96,7 @@ const StepOne = ({ formData, errors, updateField, clearFieldError }) => (
           <input
             id="companyName" type="text"
             className="form-field__input"
-            placeholder="Your company or startup name"
+            placeholder="Workplace or organization (optional)"
             value={formData.companyName}
             onChange={e => updateField('companyName', e.target.value)}
             autoComplete="organization"
@@ -105,7 +105,7 @@ const StepOne = ({ formData, errors, updateField, clearFieldError }) => (
 
         <div className="form-field">
           <label className="form-field__label" htmlFor="role">
-            <Briefcase size={14} /> Your Role
+            <Briefcase size={14} /> How would you describe yourself?
             <span className="form-field__optional">(optional)</span>
           </label>
           <select
@@ -127,3 +127,4 @@ const StepOne = ({ formData, errors, updateField, clearFieldError }) => (
 )
 
 export default StepOne
+

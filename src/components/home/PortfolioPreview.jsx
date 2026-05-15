@@ -99,12 +99,16 @@ style.textContent = `
   display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6);
 }
 .portfolio-card {
-  background: var(--color-bg-white);
+  background: #e2e8f0;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
   transition: var(--transition-slow);
   display: flex; flex-direction: column;
+}
+
+:root[data-theme='dark'] .portfolio-card {
+  background: var(--color-bg-white);
 }
 .portfolio-card:hover {
   border-color: var(--color-gold-border);

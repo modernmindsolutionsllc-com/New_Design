@@ -35,7 +35,7 @@ const NotFoundPage = () => (
             <Home size={18} /> Back to Home
           </Link>
           <Link to="/start-project" className="btn btn--ghost btn--lg">
-            Start a Project <ArrowRight size={16} />
+            Schedule Today <ArrowRight size={16} />
           </Link>
         </motion.div>
 

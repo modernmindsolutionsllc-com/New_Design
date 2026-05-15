@@ -39,7 +39,7 @@ const StepFour = ({ formData, errors, updateField, clearFieldError }) => {
       <motion.div className="form-step__header" variants={FADE_UP}>
         <h2 className="form-step__title">How should we reach you?</h2>
         <p className="form-step__sub">
-          Last step — tell us the best way to get back to you with our proposal.
+          Last step - tell us the best way to reach you with next steps.
         </p>
       </motion.div>
 
@@ -146,7 +146,7 @@ const StepFour = ({ formData, errors, updateField, clearFieldError }) => {
             id="additionalNotes"
             className="form-field__input form-field__textarea"
             rows={4}
-            placeholder="Any specific concerns, constraints, competitor references, or context that might help us understand your project better..."
+            placeholder="Any constraints, references, or context that will help us understand your project better..."
             value={formData.additionalNotes}
             onChange={e => updateField('additionalNotes', e.target.value)}
           />
@@ -236,3 +236,5 @@ if (!document.head.querySelector('[data-step4-styles]')) {
   style.setAttribute('data-step4-styles', '')
   document.head.appendChild(style)
 }
+
+
