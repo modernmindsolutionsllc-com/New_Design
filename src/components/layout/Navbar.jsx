@@ -5,8 +5,8 @@ import { Menu, X, ChevronDown, Moon, Sun } from 'lucide-react'
 import { NAV_LINKS, COMPANY_NAME } from '@utils/constants'
 import { lockBodyScroll, unlockBodyScroll } from '@utils/scrollHelpers'
 import { useScrollPosition } from '@hooks/useScrollPosition'
-import logo from '@assets/images/logo.svg'
-import logoWhite from '@assets/images/logo-white.svg'
+import logo from '@assets/images/logo-white.png'
+import logoWhite from '@assets/images/logo-white.png'
 
 const Navbar = ({ theme, toggleTheme }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -44,7 +44,11 @@ const Navbar = ({ theme, toggleTheme }) => {
       <header className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}>
         <div className="container navbar__inner">
           <Link to="/" className="navbar__logo" aria-label={`${COMPANY_NAME} home`}>
-            <img src={logoSrc} alt={COMPANY_NAME} className="navbar__logo-image" />
+            <img
+              src={logoSrc}
+              alt={`${COMPANY_NAME} Logo`}
+              className="navbar__logo-image"
+            />
           </Link>
 
           <nav className="navbar__links" aria-label="Main navigation">
