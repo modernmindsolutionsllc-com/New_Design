@@ -18,7 +18,7 @@ export const FORMSPREE_ENDPOINT =
   import.meta.env.VITE_FORMSPREE_ENDPOINT || 'https://formspree.io/f/mqenrkpq'
 
 export const SOCIAL_LINKS = {
-  linkedin: 'https://www.linkedin.com/',
+  linkedin: 'https://www.linkedin.com/company/modern-mind-solutions-llc/',
   instagram: 'https://www.instagram.com/',
   facebook: 'https://www.facebook.com/',
   github: 'https://github.com/',
@@ -98,11 +98,11 @@ export const TIMELINE_OPTIONS = [
 ]
 
 export const BUDGET_OPTIONS = [
-  'Under $5,000',
-  '$5,000 - $20,000',
-  '$20,000 - $50,000',
-  '$50,000+',
-  'Need help deciding',
+  '$1 - $100',
+  '$100 - $200',
+  '$200 - $500',
+  '$500 - $1000',
+  '$1000 - $10000',
 ]
 
 export const ROLE_OPTIONS = [
