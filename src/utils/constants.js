@@ -91,11 +91,11 @@ export const TIMELINE_OPTIONS = [
 ]
 
 export const BUDGET_OPTIONS = [
-  'Under $5,000',
-  '$5,000 - $20,000',
-  '$20,000 - $50,000',
-  '$50,000+',
-  'Need help deciding',
+  '$1 - $100',
+  '$100 - $200',
+  '$200 - $500',
+  '$500 - $1000',
+  '$1000 - $10000',
 ]
 
 export const ROLE_OPTIONS = [
