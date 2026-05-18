@@ -14,7 +14,7 @@ import {
   SOCIAL_LINKS,
   WHATSAPP_URL,
 } from '@utils/constants'
-import logoWhite from '@assets/images/logo-white.png'
+import logo from '@assets/images/logo.svg'
 import '@styles/footer-section.css'
 
 const footerLinks = [
@@ -123,7 +123,7 @@ export function FooterSection() {
           <AnimatedContainer className="footer-section__brand">
             <Link to="/" aria-label={`${COMPANY_NAME} home`}>
               <img
-                src={logoWhite}
+                src={logo}
                 alt={COMPANY_NAME}
                 className="footer-section__logo"
               />

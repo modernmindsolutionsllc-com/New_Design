@@ -165,9 +165,24 @@ export const validateStep1 = (data) => {
   return errors
 }
 
+const validateBranchArray = (errors, branch, data, field, message) => {
+  const result = validateCheckboxGroup(data?.[field], message)
+  if (!result.valid) errors[`${branch}.${field}`] = result.message
+}
+
+const validateBranchRequired = (errors, branch, data, field, label) => {
+  const result = validateRequired(data?.[field], label)
+  if (!result.valid) errors[`${branch}.${field}`] = result.message
+}
+
+const formatAnswer = (value, fallback = 'Not provided') => {
+  if (Array.isArray(value)) return value.length ? value.join(', ') : fallback
+  return value || fallback
+}
+
 /**
- * Validates all fields in Step 2 (Your Project).
- * @param {Object} data - { serviceTypes, projectDescription, startingFrom, features }
+ * Validates all fields in Step 2 (Project Scope).
+ * @param {Object} data - { serviceTypes, onlinePresenceStatus, existingPresenceAnswers, newPresenceAnswers }
  * @returns {Object} errors
  */
 export const validateStep2 = (data) => {
@@ -179,11 +194,32 @@ export const validateStep2 = (data) => {
   )
   if (!serviceResult.valid) errors.serviceTypes = serviceResult.message
 
-  const descResult = validateMinLength(data.projectDescription, 20)
-  if (!descResult.valid) errors.projectDescription = descResult.message
+  const presenceResult = validateRequired(
+    data.onlinePresenceStatus,
+    'Please tell us whether you already have an online presence'
+  )
+  if (!presenceResult.valid) errors.onlinePresenceStatus = presenceResult.message
 
-  const startResult = validateRequired(data.startingFrom, 'Please select one option')
-  if (!startResult.valid) errors.startingFrom = startResult.message
+  if (data.onlinePresenceStatus === 'yes') {
+    const answers = data.existingPresenceAnswers || {}
+    validateBranchArray(errors, 'existingPresenceAnswers', answers, 'currentPresence', 'Please select your current online presence.')
+    validateBranchRequired(errors, 'existingPresenceAnswers', answers, 'currentTraffic', 'Please select your current traffic range')
+    validateBranchRequired(errors, 'existingPresenceAnswers', answers, 'wantsTrafficIncrease', 'Please tell us if you want to increase traffic')
+    validateBranchArray(errors, 'existingPresenceAnswers', answers, 'biggestProblem', 'Please select at least one current problem.')
+    validateBranchArray(errors, 'existingPresenceAnswers', answers, 'improveFirst', 'Please select what you want us to improve first.')
+    validateBranchRequired(errors, 'existingPresenceAnswers', answers, 'successMetric', 'Please describe what success would look like')
+  }
+
+  if (data.onlinePresenceStatus === 'no') {
+    const answers = data.newPresenceAnswers || {}
+    validateBranchRequired(errors, 'newPresenceAnswers', answers, 'launchType', 'Please select what you want to launch')
+    validateBranchRequired(errors, 'newPresenceAnswers', answers, 'mainGoal', 'Please select the main goal')
+    validateBranchRequired(errors, 'newPresenceAnswers', answers, 'primaryAudience', 'Please describe your primary audience')
+    validateBranchRequired(errors, 'newPresenceAnswers', answers, 'dayOneActions', 'Please describe what users should do on day one')
+    validateBranchArray(errors, 'newPresenceAnswers', answers, 'essentialFeatures', 'Please select at least one essential feature.')
+    validateBranchArray(errors, 'newPresenceAnswers', answers, 'helpNeeded', 'Please select at least one way we can help.')
+    validateBranchRequired(errors, 'newPresenceAnswers', answers, 'successMetric', 'Please describe what success would look like')
+  }
 
   return errors
 }
@@ -236,7 +272,11 @@ export const validateStep4 = (data) => {
  * @returns {Object} - Flat object for Formspree submission
  */
 export const serializeFormData = (formData) => {
-  return {
+  const existingAnswers = formData.existingPresenceAnswers || {}
+  const newAnswers = formData.newPresenceAnswers || {}
+  const hasExistingPresence = formData.onlinePresenceStatus === 'yes'
+
+  const payload = {
     // Step 1
     'Full Name': formData.name || '',
     'Email Address': formData.email || '',
@@ -248,11 +288,11 @@ export const serializeFormData = (formData) => {
     'Services Needed': Array.isArray(formData.serviceTypes)
       ? formData.serviceTypes.join(', ')
       : formData.serviceTypes || '',
-    'Support Needs': formData.projectDescription || '',
-    'Starting From': formData.startingFrom || '',
-    'Features Required': Array.isArray(formData.features)
-      ? formData.features.join(', ')
-      : 'None specified',
+    'Has Online Presence': formData.onlinePresenceStatus === 'yes'
+      ? 'Yes, already has an online presence'
+      : formData.onlinePresenceStatus === 'no'
+        ? 'No, does not have an online presence yet'
+        : 'Not answered',
 
     // Step 3
     'Timeline': formData.timeline || '',
@@ -268,6 +308,36 @@ export const serializeFormData = (formData) => {
     // Meta
     '_subject': `New Project Request from ${formData.name || 'Website Visitor'}`,
     '_replyto': formData.email || '',
+  }
+
+  if (hasExistingPresence) {
+    return {
+      ...payload,
+      'Current Online Presence': formatAnswer(existingAnswers.currentPresence),
+      'Current Website / Main Page': formatAnswer(existingAnswers.mainLink),
+      'Current Traffic': formatAnswer(existingAnswers.currentTraffic),
+      'Wants To Increase Traffic': formatAnswer(existingAnswers.wantsTrafficIncrease),
+      'Desired Traffic': formatAnswer(existingAnswers.desiredTraffic),
+      'Current Traffic Sources': formatAnswer(existingAnswers.trafficSources),
+      'Biggest Current Problems': formatAnswer(existingAnswers.biggestProblem),
+      'Improve First': formatAnswer(existingAnswers.improveFirst),
+      'Tracking Tools': formatAnswer(existingAnswers.trackingTools),
+      'Existing Presence Success Goal': formatAnswer(existingAnswers.successMetric),
+    }
+  }
+
+  return {
+    ...payload,
+    'Launch Type': formatAnswer(newAnswers.launchType),
+    'New Presence Main Goal': formatAnswer(newAnswers.mainGoal),
+    'Primary Audience': formatAnswer(newAnswers.primaryAudience),
+    'Day One User Actions': formatAnswer(newAnswers.dayOneActions),
+    'Essential First Version Features': formatAnswer(newAnswers.essentialFeatures),
+    'Branding / Content Readiness': formatAnswer(newAnswers.brandReadiness),
+    'Example Sites / Competitors': formatAnswer(newAnswers.inspirationLinks),
+    'Business Tool Integrations': formatAnswer(newAnswers.integrations),
+    'Help Needed From ModernMind': formatAnswer(newAnswers.helpNeeded),
+    'New Presence 3 Month Success Goal': formatAnswer(newAnswers.successMetric),
   }
 }
 

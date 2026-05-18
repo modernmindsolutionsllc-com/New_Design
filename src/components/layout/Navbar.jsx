@@ -5,8 +5,7 @@ import { Menu, X, ChevronDown, Moon, Sun } from 'lucide-react'
 import { NAV_LINKS, COMPANY_NAME } from '@utils/constants'
 import { lockBodyScroll, unlockBodyScroll } from '@utils/scrollHelpers'
 import { useScrollPosition } from '@hooks/useScrollPosition'
-import logo from '@assets/images/logo-white.png'
-import logoWhite from '@assets/images/logo-white.png'
+import logo from '@assets/images/logo.svg'
 
 const Navbar = ({ theme, toggleTheme }) => {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -37,15 +36,13 @@ const Navbar = ({ theme, toggleTheme }) => {
 
   const isDarkTheme = theme === 'dark'
   const themeLabel = isDarkTheme ? 'Switch to light mode' : 'Switch to dark mode'
-  const logoSrc = isDarkTheme ? logoWhite : logo
-
   return (
     <>
       <header className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}>
         <div className="container navbar__inner">
           <Link to="/" className="navbar__logo" aria-label={`${COMPANY_NAME} home`}>
             <img
-              src={logoSrc}
+              src={logo}
               alt={`${COMPANY_NAME} Logo`}
               className="navbar__logo-image"
             />

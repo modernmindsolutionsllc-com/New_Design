@@ -26,9 +26,31 @@ const INITIAL_FORM_DATA = {
 
   // Step 2 — Your Project
   serviceTypes: [],      // Array of selected service IDs
-  projectDescription: '',
-  startingFrom: '',      // 'scratch' | 'existing'
-  features: [],          // Array of selected feature strings
+  onlinePresenceStatus: '',
+  existingPresenceAnswers: {
+    currentPresence: [],
+    mainLink: '',
+    currentTraffic: '',
+    wantsTrafficIncrease: '',
+    desiredTraffic: [],
+    trafficSources: [],
+    biggestProblem: [],
+    improveFirst: [],
+    trackingTools: [],
+    successMetric: '',
+  },
+  newPresenceAnswers: {
+    launchType: '',
+    mainGoal: '',
+    primaryAudience: '',
+    dayOneActions: '',
+    essentialFeatures: [],
+    brandReadiness: '',
+    inspirationLinks: '',
+    integrations: [],
+    helpNeeded: [],
+    successMetric: '',
+  },
 
   // Step 3 — Timeline & Budget
   timeline: '',
