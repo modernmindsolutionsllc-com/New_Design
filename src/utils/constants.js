@@ -4,13 +4,10 @@ export const COMPANY_DESCRIPTION =
   'Modern, performant web solutions that help businesses stand out and grow faster.'
 
 export const CONTACT_EMAIL =
-  import.meta.env.VITE_CONTACT_EMAIL || 'info@modernmindsolutionsllc.com'
+  import.meta.env.VITE_CONTACT_EMAIL || 'hr_services@modernmindsolutionsllc.com'
 
 export const CONTACT_PHONE =
   import.meta.env.VITE_CONTACT_PHONE || '+1 (000) 000-0000'
-
-export const WHATSAPP_NUMBER =
-  import.meta.env.VITE_WHATSAPP_NUMBER || '10000000000'
 
 export const COMPANY_ADDRESS = 'Boston, US / Ahmedabad, Gujarat'
 
@@ -18,16 +15,12 @@ export const FORMSPREE_ENDPOINT =
   import.meta.env.VITE_FORMSPREE_ENDPOINT || 'https://formspree.io/f/mqenrkpq'
 
 export const SOCIAL_LINKS = {
-  linkedin: 'https://www.linkedin.com/',
+  linkedin: 'https://www.linkedin.com/company/modern-mind-solutions-llc/',
   instagram: 'https://www.instagram.com/',
   facebook: 'https://www.facebook.com/',
   github: 'https://github.com/',
   dribbble: 'https://dribbble.com/',
 }
-
-export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-  "Hi! I'm interested in discussing a web or app project with ModernMind Solutions LLC."
-)}`
 
 export const NAV_LINKS = [
   { label: 'Home', path: '/' },
@@ -117,7 +110,6 @@ export const ROLE_OPTIONS = [
 export const CONTACT_METHOD_OPTIONS = [
   { id: 'email', label: 'Email', emoji: 'EMAIL' },
   { id: 'phone', label: 'Phone Call', emoji: 'CALL' },
-  { id: 'whatsapp', label: 'WhatsApp', emoji: 'CHAT' },
 ]
 
 export const BEST_TIME_OPTIONS = [

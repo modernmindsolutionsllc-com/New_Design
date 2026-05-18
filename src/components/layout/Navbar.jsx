@@ -5,7 +5,7 @@ import { Menu, X, ChevronDown, Moon, Sun } from 'lucide-react'
 import { NAV_LINKS, COMPANY_NAME } from '@utils/constants'
 import { lockBodyScroll, unlockBodyScroll } from '@utils/scrollHelpers'
 import { useScrollPosition } from '@hooks/useScrollPosition'
-import logo from '@assets/images/logo.svg'
+import logo from '@assets/images/logo.png'
 
 const Navbar = ({ theme, toggleTheme }) => {
   const [mobileOpen, setMobileOpen] = useState(false)

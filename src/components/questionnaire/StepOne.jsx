@@ -69,7 +69,7 @@ const StepOne = ({ formData, errors, updateField, clearFieldError }) => (
 
         <div className={`form-field ${fieldHasError(errors, 'phone') ? 'form-field--error' : ''}`}>
           <label className="form-field__label" htmlFor="phone">
-            <Phone size={14} /> Phone / WhatsApp <span className="form-field__required">*</span>
+            <Phone size={14} /> Phone <span className="form-field__required">*</span>
           </label>
           <input
             id="phone" type="tel"

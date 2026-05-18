@@ -280,7 +280,7 @@ export const serializeFormData = (formData) => {
     // Step 1
     'Full Name': formData.name || '',
     'Email Address': formData.email || '',
-    'Phone / WhatsApp': formData.phone || '',
+    'Phone': formData.phone || '',
     'Company Name': formData.companyName || 'Not provided',
     'Role': formData.role || 'Not specified',
 

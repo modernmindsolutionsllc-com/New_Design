@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { CheckCircle2, ArrowRight, MessageCircle } from 'lucide-react'
-import { WHATSAPP_URL, STAGGER_CONTAINER, FADE_UP } from '@utils/constants'
+import { CheckCircle2, ArrowRight } from 'lucide-react'
+import { STAGGER_CONTAINER, FADE_UP } from '@utils/constants'
 
 const SuccessScreen = ({ clientName, onReset }) => (
   <motion.div className="success-screen" variants={STAGGER_CONTAINER} initial="hidden" animate="visible">
@@ -41,11 +41,7 @@ const SuccessScreen = ({ clientName, onReset }) => (
     </motion.div>
 
     <motion.div className="success-screen__actions" variants={FADE_UP}>
-      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn btn--primary btn--lg success-screen__whatsapp">
-        <MessageCircle size={18} />
-        Chat on WhatsApp
-      </a>
-      <Link to="/" className="btn btn--ghost btn--lg">
+      <Link to="/" className="btn btn--primary btn--lg">
         Back to Home <ArrowRight size={16} />
       </Link>
     </motion.div>
@@ -151,11 +147,6 @@ style.textContent = `
   flex-wrap: wrap;
   gap: var(--space-4);
   justify-content: center;
-}
-.success-screen__whatsapp {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
 }
 .success-screen__reset {
   font-size: var(--text-sm);

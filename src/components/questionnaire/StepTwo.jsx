@@ -117,7 +117,6 @@ const INTEGRATION_OPTIONS = [
   'Email marketing',
   'Payments',
   'Calendar',
-  'WhatsApp',
   'ERP / HR system',
   'Oracle Fusion HCM',
   'Google Sheets',

@@ -3,13 +3,12 @@ import { useEffect } from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import ScrollToTop from '@components/ui/ScrollToTop'
-import WhatsAppButton from '@components/ui/WhatsAppButton'
 import { useTheme } from '@hooks/useTheme'
 
 /**
  * Layout — wraps every page.
  * Renders: Navbar → page content (via <Outlet />) → Footer
- * Also mounts the floating ScrollToTop and WhatsApp buttons.
+ * Also mounts the floating ScrollToTop button.
  * Scrolls to top on every route change.
  */
 const Layout = () => {
@@ -29,7 +28,6 @@ const Layout = () => {
       </main>
       <Footer />
       <ScrollToTop />
-      <WhatsAppButton />
     </div>
   )
 }

@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Clock, Shield, MessageCircle } from 'lucide-react'
+import { Clock, Shield, Sparkles } from 'lucide-react'
 import QuestionnaireForm from '@components/questionnaire/QuestionnaireForm'
-import { FADE_UP, STAGGER_CONTAINER, WHATSAPP_URL, CONTACT_EMAIL } from '@utils/constants'
+import { FADE_UP, STAGGER_CONTAINER, CONTACT_EMAIL } from '@utils/constants'
 
 const REASSURANCES = [
   { icon: Clock, text: 'We follow up within 24 hours, often sooner.' },
   { icon: Shield, text: 'Your information stays private and secure.' },
-  { icon: MessageCircle, text: 'Beginner-friendly process, no technical pressure.' },
+  { icon: Sparkles, text: 'Beginner-friendly process, no technical pressure.' },
 ]
 
 const StartProjectPage = () => {
@@ -105,9 +105,6 @@ const StartProjectPage = () => {
                   You can skip the form and contact us directly.
                 </p>
                 <div className="sidebar-card__contacts">
-                  <a href={WHATSAPP_URL} className="sidebar-card__contact-btn sidebar-card__contact-btn--wa" target="_blank" rel="noopener noreferrer">
-                    Message on WhatsApp
-                  </a>
                   <a href={`mailto:${CONTACT_EMAIL}`} className="sidebar-card__contact-btn sidebar-card__contact-btn--email">
                     Send an Email
                   </a>
@@ -316,15 +313,6 @@ style.textContent = `
   font-weight: 600;
   text-decoration: none;
   transition: var(--transition-base);
-}
-.sidebar-card__contact-btn--wa {
-  background: rgba(37, 211, 102, 0.12);
-  border: 1.5px solid rgba(37, 211, 102, 0.3);
-  color: #16a34a;
-}
-.sidebar-card__contact-btn--wa:hover {
-  background: rgba(37, 211, 102, 0.2);
-  border-color: rgba(37, 211, 102, 0.5);
 }
 .sidebar-card__contact-btn--email {
   background: var(--color-bg-subtle);

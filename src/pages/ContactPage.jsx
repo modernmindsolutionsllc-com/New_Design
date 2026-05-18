@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { useForm } from '@formspree/react'
 import { motion } from 'framer-motion'
-import { Mail, Globe, MapPin, MessageCircle, Send, Loader2 } from 'lucide-react'
+import { Mail, Globe, MapPin, Send, Loader2 } from 'lucide-react'
 import {
   CONTACT_EMAIL,
-  WHATSAPP_URL,
   STAGGER_CONTAINER,
   FADE_UP,
 } from '@utils/constants'
@@ -16,7 +15,6 @@ const CONTACT_METHODS = [
   { icon: Globe, label: 'Company', value: 'Modern Mind Solutions LLC', href: null },
   { icon: MapPin, label: 'Boston', value: 'Modern Mind Solutions LLC, Boston, US', href: null },
   { icon: MapPin, label: 'Ahmedabad', value: 'Modern Mind Solutions, Ahmedabad, Gujarat', href: null },
-  { icon: MessageCircle, label: 'WhatsApp', value: 'Chat with us', href: WHATSAPP_URL },
 ]
 
 const ContactPage = () => {

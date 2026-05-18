@@ -5,16 +5,14 @@ import {
   Instagram,
   Linkedin,
   Mail,
-  MessageCircle,
 } from 'lucide-react'
 import {
   COMPANY_NAME,
   COMPANY_TAGLINE,
   CONTACT_EMAIL,
   SOCIAL_LINKS,
-  WHATSAPP_URL,
 } from '@utils/constants'
-import logo from '@assets/images/logo.svg'
+import logo from '@assets/images/logo.png'
 import '@styles/footer-section.css'
 
 const footerLinks = [
@@ -132,15 +130,6 @@ export function FooterSection() {
             <p className="footer-section__contact-meta">
               Boston, US · Ahmedabad, Gujarat
             </p>
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer-section__whatsapp"
-            >
-              <MessageCircle size={16} aria-hidden />
-              Message Us on WhatsApp
-            </a>
             <p className="footer-section__copy">
               © {new Date().getFullYear()} {COMPANY_NAME}. All rights reserved.
             </p>

@@ -142,8 +142,7 @@ const QuestionnaireForm = () => {
       {/* Formspree error */}
       {formspreeState.errors && formspreeState.errors.length > 0 && (
         <div className="questionnaire__api-error">
-          Something went wrong submitting your form. Please try again or
-          reach us directly on WhatsApp.
+          Something went wrong submitting your form. Please try again or reach us by email.
         </div>
       )}
     </div>
