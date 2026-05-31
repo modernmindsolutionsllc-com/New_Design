@@ -82,110 +82,123 @@
           x: 'https://x.com/ModernMindSols',
         };
 
-        const platformMatchers = [
-          { key: 'linkedin', label: /\blinkedin\b/i, href: /linkedin\.com/i },
-          { key: 'facebook', label: /\bfacebook\b/i, href: /facebook\.com/i },
-          { key: 'instagram', label: /\binstagram\b/i, href: /instagram\.com/i },
-          { key: 'x', label: /(^|\s)(x|twitter)(\s|$)/i, href: /(x\.com|twitter\.com)/i },
-        ];
+        const normalize = (value) => (value || '').replace(/\s+/g, ' ').trim().toLowerCase();
 
-        document.querySelectorAll('a').forEach((anchor) => {
-          const hrefRaw = anchor.getAttribute('href') || '';
-          const href = hrefRaw.toLowerCase();
-          const label = [
-            anchor.getAttribute('aria-label') || '',
-            anchor.getAttribute('title') || '',
-            anchor.dataset?.social || '',
-            anchor.className || '',
-            anchor.textContent || '',
-          ]
-            .join(' ')
-            .toLowerCase();
+        const applySocialLinks = () => {
+          document.querySelectorAll('a').forEach((anchor) => {
+            const label = normalize(
+              [
+                anchor.getAttribute('aria-label'),
+                anchor.getAttribute('title'),
+                anchor.dataset?.social,
+                anchor.className,
+                anchor.textContent,
+              ].join(' ')
+            );
 
-          // Prefer label-based matching so icons/text can correct a wrong href (e.g. all links pointing to LinkedIn).
-          const labelMatch = platformMatchers.find((m) => m.label.test(label));
-          const hrefMatch = platformMatchers.find((m) => m.href.test(href));
-          const matchedPlatform = (labelMatch || hrefMatch)?.key;
+            if (label.includes('linkedin')) {
+              anchor.href = socialProfiles.linkedin;
+              anchor.target = '_blank';
+              anchor.rel = 'noreferrer';
+            } else if (label.includes('facebook')) {
+              anchor.href = socialProfiles.facebook;
+              anchor.target = '_blank';
+              anchor.rel = 'noreferrer';
+            } else if (label.includes('instagram')) {
+              anchor.href = socialProfiles.instagram;
+              anchor.target = '_blank';
+              anchor.rel = 'noreferrer';
+            } else if (label.includes('twitter') || label === 'x' || label.includes(' x ')) {
+              anchor.href = socialProfiles.x;
+              anchor.target = '_blank';
+              anchor.rel = 'noreferrer';
+            }
+          });
+        };
 
-          if (!matchedPlatform) {
-            return;
+        const injectFooterContent = () => {
+          const footer = document.querySelector('footer');
+          if (!footer) {
+            return false;
           }
 
-          anchor.href = socialProfiles[matchedPlatform];
-          anchor.target = '_blank';
-          anchor.rel = 'noreferrer';
-        });
+          const connectHeading = Array.from(
+            footer.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, div')
+          ).find((node) => normalize(node.textContent) === 'connect');
 
-        const connectHeading = Array.from(
-          document.querySelectorAll('h2, h3, h4, h5, h6, p, span')
-        ).find((node) => node.textContent?.trim().toLowerCase() === 'connect');
-
-        if (connectHeading) {
-          const connectContainer = connectHeading.closest('div, section, article');
-          if (connectContainer) {
-            const existingAnchors = Array.from(connectContainer.querySelectorAll('a'));
-            const linkedinAnchor =
-              existingAnchors.find((anchor) =>
-                /linkedin/i.test(
+          if (connectHeading) {
+            const connectColumn = connectHeading.closest('div, section, article');
+            if (connectColumn && !connectColumn.querySelector('[data-mms-social-stack]')) {
+              Array.from(connectColumn.querySelectorAll('a')).forEach((anchor) => {
+                const text = normalize(anchor.textContent);
+                const label = normalize(
                   [
-                    anchor.textContent || '',
-                    anchor.getAttribute('aria-label') || '',
-                    anchor.getAttribute('title') || '',
+                    anchor.getAttribute('aria-label'),
+                    anchor.getAttribute('title'),
+                    anchor.dataset?.social,
                   ].join(' ')
-                )
-              ) || existingAnchors[0] || null;
+                );
 
-            const ensureLink = (label, href) => {
-              const candidate = existingAnchors.find(
-                (anchor) => (anchor.textContent || '').trim().toLowerCase() === label.toLowerCase()
-              );
+                if (text === 'linkedin' || label === 'linkedin' || text === 'email us' || label === 'email us') {
+                  anchor.remove();
+                }
+              });
 
-              if (candidate) {
-                candidate.href = href;
-                candidate.target = '_blank';
-                candidate.rel = 'noreferrer';
-                return;
-              }
+              const socialStack = document.createElement('div');
+              socialStack.setAttribute('data-mms-social-stack', 'true');
+              socialStack.style.display = 'grid';
+              socialStack.style.gap = '8px';
+              socialStack.style.marginTop = '4px';
 
-              if (!linkedinAnchor || !linkedinAnchor.parentElement) {
-                return;
-              }
+              [
+                ['LinkedIn', socialProfiles.linkedin],
+                ['Facebook', socialProfiles.facebook],
+                ['Instagram', socialProfiles.instagram],
+                ['X', socialProfiles.x],
+              ].forEach(([label, href]) => {
+                const link = document.createElement('a');
+                link.textContent = label;
+                link.href = href;
+                link.target = '_blank';
+                link.rel = 'noreferrer';
+                link.style.color = 'inherit';
+                link.style.textDecoration = 'none';
+                link.style.display = 'inline-flex';
+                link.style.alignItems = 'center';
+                link.style.width = 'fit-content';
+                link.style.lineHeight = '1.1';
+                socialStack.appendChild(link);
+              });
 
-              const clone = linkedinAnchor.cloneNode(true);
-              clone.textContent = label;
-              clone.href = href;
-              clone.target = '_blank';
-              clone.rel = 'noreferrer';
-              linkedinAnchor.parentElement.appendChild(clone);
-              existingAnchors.push(clone);
-            };
+              const email = document.createElement('a');
+              email.textContent = 'info@modernmindsolutionsllc.com';
+              email.href = 'mailto:info@modernmindsolutionsllc.com';
+              email.style.color = 'inherit';
+              email.style.textDecoration = 'none';
+              email.style.display = 'inline-flex';
+              email.style.alignItems = 'center';
+              email.style.width = 'fit-content';
+              email.style.lineHeight = '1.1';
+              socialStack.appendChild(email);
 
-            ensureLink('LinkedIn', socialProfiles.linkedin);
-            ensureLink('Facebook', socialProfiles.facebook);
-            ensureLink('Instagram', socialProfiles.instagram);
-            ensureLink('X', socialProfiles.x);
-            ensureLink('info@modernmindsolutionsllc.com', 'mailto:info@modernmindsolutionsllc.com');
-
-            const companyAndLocationDetails = [
-              'Modern Mind Solutions LLC',
-              'Boston, US',
-              'Modern Mind Solutions',
-              'Ahmedabad, Gujarat',
-            ];
-
-            companyAndLocationDetails.forEach((detail) => {
-              const alreadyPresent = Array.from(connectContainer.querySelectorAll('*')).some(
-                (el) => (el.textContent || '').trim().toLowerCase() === detail.toLowerCase()
-              );
-              if (alreadyPresent) {
-                return;
-              }
-
-              const detailNode = document.createElement('p');
-              detailNode.textContent = detail;
-              connectContainer.appendChild(detailNode);
-            });
+              connectColumn.appendChild(socialStack);
+            }
           }
+
+          return true;
+        };
+
+        applySocialLinks();
+        if (!injectFooterContent()) {
+          const observer = new MutationObserver(() => {
+            applySocialLinks();
+            if (injectFooterContent()) {
+              observer.disconnect();
+            }
+          });
+
+          observer.observe(document.documentElement, { childList: true, subtree: true });
+          window.setTimeout(() => observer.disconnect(), 8000);
         }
       });
     </script>
