@@ -86,7 +86,8 @@ const ServiceBlock = ({ service, index }) => {
                   src={service.imageUrl}
                   alt={service.imageAlt}
                   className="service-block__image"
-                  loading="lazy"
+                    loading="lazy"
+                    decoding="async"
                 />
                 <div className="service-block__image-overlay" />
                 <div className="service-block__floating-card service-block__floating-card--top">

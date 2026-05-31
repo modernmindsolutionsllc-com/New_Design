@@ -63,9 +63,59 @@
     </script>
 
     <link rel="canonical" href="https://www.modernmindllc.com/" />
+    <meta name="theme-color" content="#0B1228" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const socialProfiles = {
+          linkedin:
+            'https://www.linkedin.com/company/modern-mind-solutions-llc/posts/?feedView=all',
+          facebook:
+            'https://www.facebook.com/people/Modern-Mind-Solutions-LLC/61590709372615/',
+          instagram: 'https://www.instagram.com/hr_services2026/',
+          x: 'https://x.com/ModernMindSols',
+        };
+
+        const platformMatchers = [
+          { key: 'linkedin', label: /\blinkedin\b/i, href: /linkedin\.com/i },
+          { key: 'facebook', label: /\bfacebook\b/i, href: /facebook\.com/i },
+          { key: 'instagram', label: /\binstagram\b/i, href: /instagram\.com/i },
+          { key: 'x', label: /(^|\s)(x|twitter)(\s|$)/i, href: /(x\.com|twitter\.com)/i },
+        ];
+
+        document.querySelectorAll('a').forEach((anchor) => {
+          const hrefRaw = anchor.getAttribute('href') || '';
+          const href = hrefRaw.toLowerCase();
+          const label = [
+            anchor.getAttribute('aria-label') || '',
+            anchor.getAttribute('title') || '',
+            anchor.dataset?.social || '',
+            anchor.className || '',
+            anchor.textContent || '',
+          ]
+            .join(' ')
+            .toLowerCase();
+
+          // Prefer label-based matching so icons/text can correct a wrong href (e.g. all links pointing to LinkedIn).
+          const labelMatch = platformMatchers.find((m) => m.label.test(label));
+          const hrefMatch = platformMatchers.find((m) => m.href.test(href));
+          const matchedPlatform = (labelMatch || hrefMatch)?.key;
+
+          if (!matchedPlatform) {
+            return;
+          }
+
+          anchor.href = socialProfiles[matchedPlatform];
+          anchor.target = '_blank';
+          anchor.rel = 'noreferrer';
+        });
+      });
+    </script>
   </body>
 </html>
