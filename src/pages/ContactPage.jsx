@@ -119,7 +119,7 @@ const ContactPage = () => {
 
               <div className="contact-page__response-badge">
                 <CalendarCheck2 size={16} />
-                We typically respond within <strong>24 hours</strong> on weekdays
+                We reply within <strong>5-6 hrs</strong> on weekdays
               </div>
             </motion.div>
 

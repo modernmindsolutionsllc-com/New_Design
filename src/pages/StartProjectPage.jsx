@@ -5,7 +5,7 @@ import QuestionnaireForm from '@components/questionnaire/QuestionnaireForm'
 import { FADE_UP, STAGGER_CONTAINER, CONTACT_EMAIL } from '@utils/constants'
 
 const REASSURANCES = [
-  { icon: Clock, text: 'We follow up within 24 hours, often sooner.' },
+  { icon: Clock, text: 'We reply within 5-6 hrs on weekdays.' },
   { icon: Shield, text: 'Your information stays private and secure.' },
   { icon: Sparkles, text: 'Beginner-friendly process, no technical pressure.' },
 ]

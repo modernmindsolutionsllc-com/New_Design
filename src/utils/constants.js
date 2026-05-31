@@ -4,22 +4,21 @@ export const COMPANY_DESCRIPTION =
   'We help businesses identify what they need, build it, and grow with it.'
 
 export const CONTACT_EMAIL =
-  import.meta.env.VITE_CONTACT_EMAIL || 'hr_services@modernmindsolutionsllc.com'
+  import.meta.env.VITE_CONTACT_EMAIL || 'info@modernmindsolutionsllc.com'
 
 export const CONTACT_PHONE =
   import.meta.env.VITE_CONTACT_PHONE || '+1 (000) 000-0000'
 
-export const COMPANY_ADDRESS = 'Boston, US / Ahmedabad, Gujarat'
+export const COMPANY_ADDRESS = 'Boston, Massachusetts, US \u00b7 Ahmedabad, Gujarat, India'
 
 export const FORMSPREE_ENDPOINT =
   import.meta.env.VITE_FORMSPREE_ENDPOINT || 'https://formspree.io/f/mqenrkpq'
 
 export const SOCIAL_LINKS = {
-  linkedin: 'https://www.linkedin.com/company/modern-mind-solutions-llc/',
-  instagram: 'https://www.instagram.com/',
-  facebook: 'https://www.facebook.com/',
-  github: 'https://github.com/',
-  dribbble: 'https://dribbble.com/',
+  linkedin: 'https://www.linkedin.com/company/modern-mind-solutions-llc/posts/?feedView=all',
+  instagram: 'https://www.instagram.com/hr_services2026/',
+  facebook: 'https://www.facebook.com/people/Modern-Mind-Solutions-LLC/61590709372615/',
+  x: 'https://x.com/ModernMindSols',
 }
 
 export const NAV_LINKS = [

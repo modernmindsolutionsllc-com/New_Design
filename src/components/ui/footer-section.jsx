@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Linkedin, Mail } from 'lucide-react'
+import { Facebook, Instagram, Linkedin, Mail, Twitter } from 'lucide-react'
 import {
+  COMPANY_ADDRESS,
   COMPANY_NAME,
   COMPANY_TAGLINE,
   CONTACT_EMAIL,
@@ -42,7 +43,10 @@ const footerLinks = [
     label: 'Connect',
     links: [
       { title: 'LinkedIn', href: SOCIAL_LINKS.linkedin, icon: Linkedin, external: true },
-      { title: 'Email Us', href: `mailto:${CONTACT_EMAIL}`, icon: Mail, external: true },
+      { title: 'Facebook', href: SOCIAL_LINKS.facebook, icon: Facebook, external: true },
+      { title: 'Instagram', href: SOCIAL_LINKS.instagram, icon: Instagram, external: true },
+      { title: 'X', href: SOCIAL_LINKS.x, icon: Twitter, external: true },
+      { title: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}`, icon: Mail, external: true },
     ],
   },
 ]
@@ -116,7 +120,7 @@ export function FooterSection() {
               <img src={logo} alt={COMPANY_NAME} className="footer-section__logo" />
             </Link>
             <p className="footer-section__tagline">{COMPANY_TAGLINE}</p>
-            <p className="footer-section__contact-meta">Boston, US · Ahmedabad, Gujarat</p>
+            <p className="footer-section__contact-meta">{COMPANY_ADDRESS}</p>
             <p className="footer-section__contact-meta">
               We help businesses identify what they need, build it, and grow with it.
             </p>
