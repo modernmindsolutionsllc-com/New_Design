@@ -69,51 +69,115 @@
     <script type="module" src="/src/main.jsx"></script>
     <script>
       window.addEventListener('DOMContentLoaded', () => {
-        const replacementText = 'We reply within 5-6 hrs on weekends';
-        const matcher = /24\s*hrs?|24\s*hours?/i;
+        const socialProfiles = {
+          linkedin:
+            'https://www.linkedin.com/company/modern-mind-solutions-llc/posts/?feedView=all',
+          facebook:
+            'https://www.facebook.com/people/Modern-Mind-Solutions-LLC/61590709372615/',
+          instagram: 'https://www.instagram.com/hr_services2026/',
+          x: 'https://x.com/ModernMindSols',
+        };
+        const responseText = 'We reply within 5-6 hrs on weekdays';
         const locationText = 'Boston, Massachusetts, US · Ahmedabad, Gujarat, India';
 
-        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-        const nodes = [];
+        const normalize = (value) => (value || '').replace(/\s+/g, ' ').trim().toLowerCase();
 
-        while (walker.nextNode()) {
-          const node = walker.currentNode;
-          if (matcher.test(node.textContent || '')) {
-            nodes.push(node);
+        const updateFooter = () => {
+          const footer = document.querySelector('footer');
+          if (!footer) {
+            return false;
           }
-        }
 
-        nodes.forEach((node) => {
-          node.textContent = (node.textContent || '').replace(matcher, '5-6 hrs');
-          if (/reply/i.test(node.textContent)) {
-            node.textContent = replacementText;
+          const textWalker = document.createTreeWalker(footer, NodeFilter.SHOW_TEXT);
+          while (textWalker.nextNode()) {
+            const node = textWalker.currentNode;
+            const value = node.textContent || '';
+
+            if (/24\s*hrs?|24\s*hours?|reply|respond|business\s*hours?/i.test(value)) {
+              node.textContent = responseText;
+            }
+
+            if (/boston|ahmedabad|massachusetts|gujarat/i.test(value)) {
+              node.textContent = locationText;
+            }
           }
-        });
 
-        const footer = document.querySelector('footer');
-        if (!footer) {
-          return;
-        }
+          const connectHeading = Array.from(
+            footer.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, div')
+          ).find((node) => normalize(node.textContent) === 'connect');
 
-        const footerWalker = document.createTreeWalker(footer, NodeFilter.SHOW_TEXT);
-        const locationNodes = [];
-
-        while (footerWalker.nextNode()) {
-          const node = footerWalker.currentNode;
-          if (/boston|ahmedabad|massachusetts/i.test(node.textContent || '')) {
-            locationNodes.push(node);
+          if (!connectHeading) {
+            return true;
           }
-        }
 
-        if (locationNodes.length > 0) {
-          locationNodes[0].textContent = locationText;
-          locationNodes.slice(1).forEach((node) => {
-            const parent = node.parentNode;
-            if (parent) {
-              parent.removeChild(node);
+          const connectColumn = connectHeading.closest('div, section, article');
+          if (!connectColumn) {
+            return true;
+          }
+
+          Array.from(connectColumn.querySelectorAll('a')).forEach((anchor) => {
+            const label = normalize(
+              [
+                anchor.textContent,
+                anchor.getAttribute('aria-label'),
+                anchor.getAttribute('title'),
+              ].join(' ')
+            );
+
+            if (
+              label === 'linkedin' ||
+              label === 'email us' ||
+              label.includes('linkedin') ||
+              label.includes('email us')
+            ) {
+              anchor.remove();
             }
           });
-        }
+
+          let socialStack = connectColumn.querySelector('[data-mms-social-stack]');
+          if (!socialStack) {
+            socialStack = document.createElement('div');
+            socialStack.setAttribute('data-mms-social-stack', 'true');
+            socialStack.style.display = 'grid';
+            socialStack.style.gap = '8px';
+            socialStack.style.marginTop = '6px';
+            connectColumn.appendChild(socialStack);
+          }
+
+          socialStack.replaceChildren();
+
+          [
+            ['LinkedIn', socialProfiles.linkedin],
+            ['Facebook', socialProfiles.facebook],
+            ['Instagram', socialProfiles.instagram],
+            ['X', socialProfiles.x],
+            ['info@modernmindsolutionsllc.com', 'mailto:info@modernmindsolutionsllc.com'],
+          ].forEach(([label, href]) => {
+            const link = document.createElement('a');
+            link.textContent = label;
+            link.href = href;
+            link.target = href.startsWith('mailto:') ? '_self' : '_blank';
+            link.rel = href.startsWith('mailto:') ? '' : 'noreferrer';
+            link.style.color = 'inherit';
+            link.style.textDecoration = 'none';
+            link.style.display = 'inline-flex';
+            link.style.alignItems = 'center';
+            link.style.width = 'fit-content';
+            link.style.lineHeight = '1.15';
+            socialStack.appendChild(link);
+          });
+
+          return true;
+        };
+
+        updateFooter();
+
+        const observer = new MutationObserver(() => {
+          updateFooter();
+        });
+
+        observer.observe(document.documentElement, { childList: true, subtree: true });
+        window.setTimeout(() => observer.disconnect(), 10000);
       });
     </script>
   </body>
