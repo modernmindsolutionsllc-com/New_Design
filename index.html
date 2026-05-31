@@ -115,6 +115,78 @@
           anchor.target = '_blank';
           anchor.rel = 'noreferrer';
         });
+
+        const connectHeading = Array.from(
+          document.querySelectorAll('h2, h3, h4, h5, h6, p, span')
+        ).find((node) => node.textContent?.trim().toLowerCase() === 'connect');
+
+        if (connectHeading) {
+          const connectContainer = connectHeading.closest('div, section, article');
+          if (connectContainer) {
+            const existingAnchors = Array.from(connectContainer.querySelectorAll('a'));
+            const linkedinAnchor =
+              existingAnchors.find((anchor) =>
+                /linkedin/i.test(
+                  [
+                    anchor.textContent || '',
+                    anchor.getAttribute('aria-label') || '',
+                    anchor.getAttribute('title') || '',
+                  ].join(' ')
+                )
+              ) || existingAnchors[0] || null;
+
+            const ensureLink = (label, href) => {
+              const candidate = existingAnchors.find(
+                (anchor) => (anchor.textContent || '').trim().toLowerCase() === label.toLowerCase()
+              );
+
+              if (candidate) {
+                candidate.href = href;
+                candidate.target = '_blank';
+                candidate.rel = 'noreferrer';
+                return;
+              }
+
+              if (!linkedinAnchor || !linkedinAnchor.parentElement) {
+                return;
+              }
+
+              const clone = linkedinAnchor.cloneNode(true);
+              clone.textContent = label;
+              clone.href = href;
+              clone.target = '_blank';
+              clone.rel = 'noreferrer';
+              linkedinAnchor.parentElement.appendChild(clone);
+              existingAnchors.push(clone);
+            };
+
+            ensureLink('LinkedIn', socialProfiles.linkedin);
+            ensureLink('Facebook', socialProfiles.facebook);
+            ensureLink('Instagram', socialProfiles.instagram);
+            ensureLink('X', socialProfiles.x);
+            ensureLink('info@modernmindsolutionsllc.com', 'mailto:info@modernmindsolutionsllc.com');
+
+            const companyAndLocationDetails = [
+              'Modern Mind Solutions LLC',
+              'Boston, US',
+              'Modern Mind Solutions',
+              'Ahmedabad, Gujarat',
+            ];
+
+            companyAndLocationDetails.forEach((detail) => {
+              const alreadyPresent = Array.from(connectContainer.querySelectorAll('*')).some(
+                (el) => (el.textContent || '').trim().toLowerCase() === detail.toLowerCase()
+              );
+              if (alreadyPresent) {
+                return;
+              }
+
+              const detailNode = document.createElement('p');
+              detailNode.textContent = detail;
+              connectContainer.appendChild(detailNode);
+            });
+          }
+        }
       });
     </script>
   </body>
