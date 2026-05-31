@@ -1,17 +1,38 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Search, PenTool, Palette, Code2, TestTube2, Rocket, Headphones } from 'lucide-react'
+import { Search, ClipboardList, PenTool, TrendingUp } from 'lucide-react'
 import SectionHeading from '@components/ui/SectionHeading'
 import { FADE_UP, STAGGER_CONTAINER } from '@utils/constants'
 
 const STEPS = [
-  { number: '1', icon: Search, title: 'Discovery', desc: 'Requirements analysis, stakeholder interviews, and technical feasibility assessment.', eta: '1-2 weeks' },
-  { number: '2', icon: PenTool, title: 'Architecture', desc: 'System design, technology selection, and infrastructure planning.', eta: '1-2 weeks' },
-  { number: '3', icon: Palette, title: 'Design', desc: 'UI/UX design, prototyping, design system creation, and user testing.', eta: '2-4 weeks' },
-  { number: '4', icon: Code2, title: 'Development', desc: 'Agile sprints with continuous integration, code reviews, and demos.', eta: '6-12 weeks' },
-  { number: '5', icon: TestTube2, title: 'Testing', desc: 'Automated tests, manual QA, performance testing, and security audits.', eta: '2-3 weeks' },
-  { number: '6', icon: Rocket, title: 'Deployment', desc: 'CI/CD setup, staging validation, production release, and monitoring.', eta: '1 week' },
-  { number: '7', icon: Headphones, title: 'Support', desc: 'Post-launch monitoring, bug fixes, optimization, and feature iterations.', eta: 'Ongoing' },
+  {
+    number: '1',
+    icon: Search,
+    title: 'Understand',
+    desc: 'We learn about your business, goals, customers, and the problems you want to solve.',
+    eta: 'Discovery call',
+  },
+  {
+    number: '2',
+    icon: ClipboardList,
+    title: 'Plan',
+    desc: 'We recommend the right mix of website, marketing, automation, or app solutions for your current stage.',
+    eta: 'Clear roadmap',
+  },
+  {
+    number: '3',
+    icon: PenTool,
+    title: 'Build',
+    desc: 'We design and deliver your solution with regular updates, feedback loops, and simple communication.',
+    eta: 'Milestone-based delivery',
+  },
+  {
+    number: '4',
+    icon: TrendingUp,
+    title: 'Grow',
+    desc: 'After launch, we help you improve visibility, streamline operations, and scale what is already working.',
+    eta: 'Ongoing support',
+  },
 ]
 
 const ProcessSection = () => {
@@ -21,13 +42,19 @@ const ProcessSection = () => {
     <section className="process section section--gray" id="process">
       <div className="container">
         <SectionHeading
-          tag="OUR PROCESS"
-          heading="From Idea to Impact"
-          subline="A proven 7-step methodology refined across 120+ successful engagements."
+          tag="HOW WE WORK"
+          heading="Simple Support From First Conversation to Growth"
+          subline="A clear four-step process designed for busy business owners who want guidance, execution, and momentum."
           align="center"
         />
 
-        <motion.div ref={ref} className="process__grid" variants={STAGGER_CONTAINER} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
+        <motion.div
+          ref={ref}
+          className="process__grid"
+          variants={STAGGER_CONTAINER}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+        >
           {STEPS.map(({ number, icon: Icon, title, desc, eta }) => (
             <motion.div key={number} className="process-step" variants={FADE_UP}>
               <div className="process-step__number" aria-hidden>{number}</div>
@@ -55,8 +82,7 @@ style.textContent = `
 .process-step__title { font-family: var(--font-body); font-size: var(--text-lg); font-weight: 700; color: var(--color-text-primary); margin-bottom: var(--space-2); }
 .process-step__desc { font-size: var(--text-sm); color: var(--color-text-secondary); line-height: 1.6; min-height: 92px; }
 .process-step__eta { font-size: var(--text-sm); color: var(--color-gold); font-weight: 700; margin-top: var(--space-2); }
-@media (max-width: 1100px) { .process__grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 820px) { .process__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 1100px) { .process__grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .process__grid { grid-template-columns: 1fr; } }
 `
 if (!document.head.querySelector('[data-proc-styles]')) {

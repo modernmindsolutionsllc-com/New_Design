@@ -8,7 +8,7 @@ import { FADE_UP, STAGGER_CONTAINER } from '@utils/constants'
 
 const BlogPostPage = () => {
   const { slug } = useParams()
-  const post = BLOG_POSTS.find((p) => p.slug === slug)
+  const post = BLOG_POSTS.find((item) => item.slug === slug)
 
   if (!post) return <Navigate to="/blog" replace />
 
@@ -59,26 +59,28 @@ const BlogPostPage = () => {
           <div className="blog-post__layout">
             <article className="blog-post__content">
               <p>
-                Building digital products can feel overwhelming. This guide keeps things simple,
-                practical, and actionable so your team can move forward with confidence.
+                Digital growth gets easier when the focus stays on the business problem first.
+                Whether you need more customers, better visibility, smoother systems, or less
+                manual work, the right solution starts with understanding the real goal.
               </p>
               <p>
                 <strong>Key idea:</strong> {post.excerpt}
               </p>
               <p>
-                If you are unsure which service fits best, that is completely okay. Reach out and
-                we will help you choose the right path for your business goals.
+                Business owners do not need to map out the technology stack before taking the
+                next step. What matters most is knowing the outcome you want and working with a
+                partner who can translate that into a practical digital plan.
               </p>
             </article>
 
             <aside className="blog-post__sidebar">
               <div className="blog-post__sidebar-card">
-                <h3 className="blog-post__sidebar-heading">Ready to talk?</h3>
+                <h3 className="blog-post__sidebar-heading">Need help choosing the right next move?</h3>
                 <p className="blog-post__sidebar-text">
-                  Share your project details and we will get back to you with next steps.
+                  Use our Business Needs Finder and we will help you understand what fits your business best.
                 </p>
                 <Link to="/start-project" className="btn btn--primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                  Start Project
+                  Find My Best Fit
                 </Link>
               </div>
             </aside>

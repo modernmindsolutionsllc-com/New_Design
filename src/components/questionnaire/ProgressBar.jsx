@@ -1,25 +1,15 @@
 import { motion } from 'framer-motion'
 import { FORM_STEPS } from '@utils/constants'
 
-/**
- * ProgressBar
- * Shows current step number, step label, and a gold fill bar.
- *
- * Props:
- *  currentStep     — 1-4
- *  totalSteps      — 4
- *  progressPercent — 0-100
- */
 const ProgressBar = ({ currentStep, totalSteps, progressPercent }) => (
   <div className="progress-bar">
-    {/* Step labels row */}
     <div className="progress-bar__steps">
       {FORM_STEPS.map(({ step, label }) => (
         <div
           key={step}
           className={`progress-bar__step
             ${step === currentStep ? 'progress-bar__step--active' : ''}
-            ${step < currentStep  ? 'progress-bar__step--done'   : ''}
+            ${step < currentStep ? 'progress-bar__step--done' : ''}
           `}
         >
           <div className="progress-bar__dot">
@@ -30,9 +20,12 @@ const ProgressBar = ({ currentStep, totalSteps, progressPercent }) => (
       ))}
     </div>
 
-    {/* Gold fill track */}
-    <div className="progress-bar__track" role="progressbar"
-      aria-valuenow={progressPercent} aria-valuemin={0} aria-valuemax={100}
+    <div
+      className="progress-bar__track"
+      role="progressbar"
+      aria-valuenow={progressPercent}
+      aria-valuemin={0}
+      aria-valuemax={100}
       aria-label={`Step ${currentStep} of ${totalSteps}`}
     >
       <motion.div
@@ -53,64 +46,94 @@ export default ProgressBar
 
 const style = document.createElement('style')
 style.textContent = `
-.progress-bar { display: flex; flex-direction: column; gap: var(--space-4); }
-
-/* Step dots + labels */
+.progress-bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
 .progress-bar__steps {
-  display: flex; justify-content: space-between; align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: var(--space-2);
 }
 .progress-bar__step {
-  display: flex; flex-direction: column; align-items: center;
-  gap: var(--space-2); flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
 }
 .progress-bar__dot {
-  width: 32px; height: 32px; border-radius: 50%;
-  font-family: var(--font-body); font-size: var(--text-sm); font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 2px solid var(--color-border);
-  background: var(--color-bg-white);
+  background: linear-gradient(180deg, var(--color-bg-white), color-mix(in srgb, var(--color-bg-subtle) 70%, white 30%));
   color: var(--color-text-muted);
   transition: all 0.3s ease;
 }
 .progress-bar__step--active .progress-bar__dot {
   border-color: var(--color-gold);
-  background: var(--color-gold-subtle);
+  background: linear-gradient(180deg, rgba(34, 182, 255, 0.2), rgba(34, 182, 255, 0.08));
   color: var(--color-gold-dark);
+  box-shadow: 0 10px 24px rgba(34, 182, 255, 0.16);
 }
 .progress-bar__step--done .progress-bar__dot {
   border-color: var(--color-gold);
-  background: var(--color-gold);
-  color: var(--color-bg-dark);
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+  color: white;
 }
 .progress-bar__label {
-  font-family: var(--font-body); font-size: var(--text-xs); font-weight: 500;
-  color: var(--color-text-muted); text-align: center;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-align: center;
   transition: color 0.3s ease;
 }
-.progress-bar__step--active .progress-bar__label { color: var(--color-gold-dark); font-weight: 700; }
-.progress-bar__step--done  .progress-bar__label  { color: var(--color-text-secondary); }
-
-/* Track */
+.progress-bar__step--active .progress-bar__label {
+  color: var(--color-gold-dark);
+  font-weight: 700;
+}
+.progress-bar__step--done .progress-bar__label {
+  color: var(--color-text-secondary);
+}
 .progress-bar__track {
-  height: 4px; background: var(--color-border);
-  border-radius: var(--radius-full); overflow: hidden;
+  height: 6px;
+  background: color-mix(in srgb, var(--color-border) 80%, transparent 20%);
+  border-radius: var(--radius-full);
+  overflow: hidden;
 }
 .progress-bar__fill {
-  height: 100%; background: var(--color-gold);
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
   border-radius: var(--radius-full);
 }
-
-/* Counter */
 .progress-bar__counter {
-  font-family: var(--font-body); font-size: var(--text-xs);
-  color: var(--color-text-muted); text-align: right;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-align: right;
 }
-.progress-bar__counter strong { color: var(--color-gold-dark); }
-
+.progress-bar__counter strong {
+  color: var(--color-gold-dark);
+}
 @media (max-width: 480px) {
-  .progress-bar__label { display: none; }
-  .progress-bar__dot   { width: 28px; height: 28px; font-size: 0.7rem; }
+  .progress-bar__label {
+    display: none;
+  }
+  .progress-bar__dot {
+    width: 30px;
+    height: 30px;
+    font-size: 0.7rem;
+  }
 }
 `
 if (!document.head.querySelector('[data-pb-styles]')) {

@@ -6,18 +6,18 @@ import { STAGGER_CONTAINER, FADE_UP } from '@utils/constants'
 const VALUE_PROPS = [
   {
     icon: MessageCircle,
-    title: 'Beginner-Friendly Process',
-    desc: 'Clear language, guided steps, and no technical confusion for first-time clients.',
+    title: 'Business-First Guidance',
+    desc: 'We explain technology in simple language so you can make confident business decisions without the jargon.',
   },
   {
     icon: Clock,
-    title: 'Fast Delivery Cycles',
-    desc: 'Agile execution with quick iterations, demos, and milestone-based progress.',
+    title: 'Solutions That Save Time',
+    desc: 'From websites to automation, we focus on tools that reduce manual work and help your business run smoother.',
   },
   {
     icon: ShieldCheck,
-    title: 'Reliable Partnership',
-    desc: 'Transparent communication, practical recommendations, and long-term support.',
+    title: 'A Partner You Can Rely On',
+    desc: 'You get practical recommendations, clear communication, and ongoing support as your business grows.',
   },
 ]
 

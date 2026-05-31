@@ -2,6 +2,7 @@ import HeroSection        from '@components/home/HeroSection'
 import TrustStrip         from '@components/home/TrustStrip'
 import ValueProps         from '@components/home/ValueProps'
 import ServicesPreview    from '@components/home/ServicesPreview'
+import IndustriesSection  from '@components/home/IndustriesSection'
 import ProcessSection     from '@components/home/ProcessSection'
 import PortfolioPreview   from '@components/home/PortfolioPreview'
 import StatsRow           from '@components/home/StatsRow'
@@ -31,6 +32,7 @@ const HomePage = () => (
     <TrustStrip />
     <ValueProps />
     <ServicesPreview />
+    <IndustriesSection />
     <ProcessSection />
     <PortfolioPreview />
     <StatsRow />

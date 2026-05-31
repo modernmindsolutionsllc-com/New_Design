@@ -13,8 +13,8 @@ const TeamSection = () => {
       <div className="container">
         <SectionHeading
           tag="Our Team"
-          heading="Execution Team You Can Count On"
-          subline="A cross-functional team of strategists, designers, and engineers focused on business impact."
+          heading="A Consultancy Team You Can Rely On"
+          subline="A practical team that combines strategy, design, and delivery to help businesses move forward with confidence."
           align="center"
         />
 

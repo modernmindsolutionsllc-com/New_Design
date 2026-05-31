@@ -10,6 +10,8 @@ const REASSURANCES = [
   { icon: Sparkles, text: 'Beginner-friendly process, no technical pressure.' },
 ]
 
+const PREVIEW_IMAGE = 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80'
+
 const StartProjectPage = () => {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true })
 
@@ -24,15 +26,14 @@ const StartProjectPage = () => {
             animate="visible"
           >
             <motion.span className="section-tag" variants={FADE_UP}>
-              Start Your Project
+              Business Needs Finder
             </motion.span>
             <motion.h1 className="start-project-page__heading" variants={FADE_UP}>
-              Let&apos;s Build Something
-              <span className="start-project-page__heading--accent"> Great Together</span>
+              Let&apos;s Find What Your Business
+              <span className="start-project-page__heading--accent"> Needs Next</span>
             </motion.h1>
             <motion.p className="start-project-page__sub" variants={FADE_UP}>
-              Share a few details and we will help you choose the right service stack.
-              This form is beginner-friendly and takes about 3 minutes.
+              Tell us about your business, goals, and stage. We&apos;ll turn that into practical recommendations for the right website, marketing, app, or automation solution.
             </motion.p>
 
             <motion.div className="start-project-page__pills" variants={FADE_UP}>
@@ -65,14 +66,27 @@ const StartProjectPage = () => {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
             >
+              <div className="sidebar-visual">
+                <img
+                  src={PREVIEW_IMAGE}
+                  alt="Business consultation planning session"
+                  className="sidebar-visual__image"
+                />
+                <div className="sidebar-visual__overlay" />
+                <div className="sidebar-visual__content">
+                  <span className="sidebar-visual__eyebrow">Clarity first</span>
+                  <h3 className="sidebar-visual__title">We help business owners decide what to build before they spend.</h3>
+                </div>
+              </div>
+
               <div className="sidebar-card">
                 <h3 className="sidebar-card__heading">What happens next?</h3>
                 <ol className="sidebar-card__steps">
                   {[
                     { num: '01', title: 'We review your brief', sub: 'Usually within a few hours.' },
-                    { num: '02', title: 'We align on scope', sub: 'Clear recommendations and project fit.' },
-                    { num: '03', title: 'You approve proposal', sub: 'Timeline, milestones, and pricing shared.' },
-                    { num: '04', title: 'We kick off delivery', sub: 'Execution begins with regular updates.' },
+                    { num: '02', title: 'We map out your best-fit solution', sub: 'Clear recommendations based on your business goals.' },
+                    { num: '03', title: 'We share the next steps', sub: 'Scope, timeline, and consultation options in plain language.' },
+                    { num: '04', title: 'We start building momentum', sub: 'Delivery begins once you feel confident about the plan.' },
                   ].map(({ num, title, sub }) => (
                     <li key={num} className="sidebar-card__step">
                       <span className="sidebar-card__step-num">{num}</span>
@@ -88,13 +102,13 @@ const StartProjectPage = () => {
               <div className="sidebar-card sidebar-card--gold">
                 <div className="sidebar-card__quote-mark" aria-hidden>"</div>
                 <p className="sidebar-card__quote">
-                  The process was clear and easy to follow. Their team translated our ideas into a product roadmap fast.
+                  The process was clear and easy to follow. Their team helped us understand what we actually needed before we spent money in the wrong places.
                 </p>
                 <div className="sidebar-card__author">
                   <div className="sidebar-card__avatar">CA</div>
                   <div>
                     <div className="sidebar-card__author-name">Client Feedback</div>
-                    <div className="sidebar-card__author-role">ModernMind Solutions</div>
+                    <div className="sidebar-card__author-role">Business owner</div>
                   </div>
                 </div>
               </div>
@@ -102,7 +116,7 @@ const StartProjectPage = () => {
               <div className="sidebar-card">
                 <h3 className="sidebar-card__heading">Prefer direct contact?</h3>
                 <p className="sidebar-card__text">
-                  You can skip the form and contact us directly.
+                  You can skip the form and contact us directly if you already know you want to talk.
                 </p>
                 <div className="sidebar-card__contacts">
                   <a href={`mailto:${CONTACT_EMAIL}`} className="sidebar-card__contact-btn sidebar-card__contact-btn--email">
@@ -128,7 +142,7 @@ style.textContent = `
   border-bottom: 1px solid var(--color-border);
 }
 .start-project-page__hero-inner {
-  max-width: 700px;
+  max-width: 760px;
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
@@ -147,7 +161,7 @@ style.textContent = `
   font-size: var(--text-lg);
   color: var(--color-text-secondary);
   line-height: 1.7;
-  max-width: 620px;
+  max-width: 680px;
 }
 .start-project-page__pills {
   display: flex;
@@ -188,6 +202,47 @@ style.textContent = `
   gap: var(--space-5);
   position: sticky;
   top: calc(var(--navbar-height) + var(--space-6));
+}
+
+.sidebar-visual {
+  position: relative;
+  min-height: 240px;
+  overflow: hidden;
+  border-radius: 24px;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+.sidebar-visual__image {
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  object-fit: cover;
+}
+.sidebar-visual__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11, 18, 40, 0.08) 8%, rgba(11, 18, 40, 0.68) 100%);
+}
+.sidebar-visual__content {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.sidebar-visual__eyebrow {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+}
+.sidebar-visual__title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.35;
+  color: white;
 }
 
 .sidebar-card {

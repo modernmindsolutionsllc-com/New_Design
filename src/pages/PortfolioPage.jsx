@@ -13,8 +13,7 @@ const CARD_COLORS = [
   'linear-gradient(135deg, #F0F7F4 0%, #A8D5C2 100%)',
 ]
 
-// Unique categories from data
-const ALL_CATEGORIES = ['All', ...new Set(PORTFOLIO_ITEMS.map(p => p.category))]
+const ALL_CATEGORIES = ['All', ...new Set(PORTFOLIO_ITEMS.map((project) => project.category))]
 
 const PortfolioPage = () => {
   const [activeFilter, setActiveFilter] = useState('All')
@@ -22,11 +21,10 @@ const PortfolioPage = () => {
 
   const filtered = activeFilter === 'All'
     ? PORTFOLIO_ITEMS
-    : PORTFOLIO_ITEMS.filter(p => p.category === activeFilter)
+    : PORTFOLIO_ITEMS.filter((project) => project.category === activeFilter)
 
   return (
     <>
-      {/* Page hero */}
       <section className="page-hero section--gray">
         <div className="container">
           <motion.div
@@ -35,40 +33,38 @@ const PortfolioPage = () => {
             initial="hidden"
             animate="visible"
           >
-            <motion.span className="section-tag" variants={FADE_UP}>Our Work</motion.span>
+            <motion.span className="section-tag" variants={FADE_UP}>Portfolio</motion.span>
             <motion.h1 className="page-hero__heading" variants={FADE_UP}>
-              Case Studies & Outcomes
+              Business Results Behind the Work
             </motion.h1>
             <div className="gold-divider" />
             <motion.p className="page-hero__sub" variants={FADE_UP}>
-              Real projects, measurable results, and practical implementation details.
+              A sample of the websites, automation systems, and digital improvements we build
+              to help businesses look better, work smarter, and grow faster.
             </motion.p>
           </motion.div>
         </div>
       </section>
 
-      {/* Portfolio grid */}
       <section className="section section--white">
         <div className="container">
-          {/* Filter tabs */}
           <motion.div
             className="portfolio-filters"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2 }}
           >
-            {ALL_CATEGORIES.map(cat => (
+            {ALL_CATEGORIES.map((category) => (
               <button
-                key={cat}
-                className={`portfolio-filter ${activeFilter === cat ? 'portfolio-filter--active' : ''}`}
-                onClick={() => setActiveFilter(cat)}
+                key={category}
+                className={`portfolio-filter ${activeFilter === category ? 'portfolio-filter--active' : ''}`}
+                onClick={() => setActiveFilter(category)}
               >
-                {cat}
+                {category}
               </button>
             ))}
           </motion.div>
 
-          {/* Cards */}
           <motion.div
             ref={ref}
             className="portfolio-page__grid"
@@ -77,7 +73,7 @@ const PortfolioPage = () => {
             animate={inView ? 'visible' : 'hidden'}
           >
             <AnimatePresence mode="popLayout">
-              {filtered.map(({ id, title, category, industry, problem, result, tags, image }, i) => (
+              {filtered.map(({ id, title, category, industry, problem, result, tags, image }, index) => (
                 <motion.div
                   key={id}
                   className="portfolio-page-card"
@@ -90,7 +86,7 @@ const PortfolioPage = () => {
                 >
                   <div
                     className="portfolio-page-card__image"
-                    style={{ background: image ? `url(${image}) center/cover` : CARD_COLORS[i % CARD_COLORS.length] }}
+                    style={{ background: image ? `url(${image}) center/cover` : CARD_COLORS[index % CARD_COLORS.length] }}
                   >
                     <Badge variant="gold" className="portfolio-page-card__badge">{category}</Badge>
                   </div>
@@ -109,11 +105,11 @@ const PortfolioPage = () => {
                     </div>
 
                     <p className="portfolio-page-card__problem">
-                      <strong>Details:</strong> {problem}
+                      <strong>Business challenge:</strong> {problem}
                     </p>
 
                     <div className="portfolio-page-card__tags">
-                      {tags.map(tag => (
+                      {tags.map((tag) => (
                         <span key={tag} className="portfolio-page-card__tag">{tag}</span>
                       ))}
                     </div>
@@ -125,7 +121,7 @@ const PortfolioPage = () => {
 
           {filtered.length === 0 && (
             <div className="portfolio-page__empty">
-              <p>No items in this category yet.</p>
+              <p>No case studies in this category yet.</p>
             </div>
           )}
         </div>
@@ -160,11 +156,10 @@ style.textContent = `
   display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6);
 }
 .portfolio-page-card {
-  background: #e2e8f0; border: 1px solid var(--color-border);
+  background: linear-gradient(180deg, var(--color-bg-white), color-mix(in srgb, var(--color-bg-white) 84%, var(--color-bg-subtle) 16%)); border: 1px solid var(--color-border);
   border-radius: var(--radius-lg); overflow: hidden;
   transition: var(--transition-slow);
 }
-
 :root[data-theme='dark'] .portfolio-page-card {
   background: var(--color-bg-white);
 }
@@ -178,7 +173,13 @@ style.textContent = `
   display: flex; align-items: flex-start;
   padding: var(--space-5);
 }
-.portfolio-page-card__badge { position: absolute; top: var(--space-4); left: var(--space-4); }
+.portfolio-page-card__image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11,18,40,0.02) 18%, rgba(11,18,40,0.2) 100%);
+}
+.portfolio-page-card__badge { position: absolute; top: var(--space-4); left: var(--space-4); z-index: 1; }
 .portfolio-page-card__body {
   padding: var(--space-6);
   display: flex; flex-direction: column; gap: var(--space-3);
@@ -218,5 +219,3 @@ if (!document.head.querySelector('[data-port-page-styles]')) {
   style.setAttribute('data-port-page-styles', '')
   document.head.appendChild(style)
 }
-
-

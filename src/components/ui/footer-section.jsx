@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
-import {
-  Linkedin,
-  Mail,
-} from 'lucide-react'
+import { Linkedin, Mail } from 'lucide-react'
 import {
   COMPANY_NAME,
   COMPANY_TAGLINE,
@@ -17,18 +14,18 @@ const footerLinks = [
   {
     label: 'Services',
     links: [
-      { title: 'Web Development', href: '/services#web-development' },
-      { title: 'Mobile Apps', href: '/services#mobile-apps' },
-      { title: 'AI & Automation', href: '/services#ai-automation' },
-      { title: 'UI/UX Design', href: '/services#ui-ux-design' },
+      { title: 'Website Development', href: '/services#website-development' },
+      { title: 'Mobile App Development', href: '/services#mobile-app-development' },
+      { title: 'Business Automation', href: '/services#business-automation' },
+      { title: 'AI Solutions', href: '/services#ai-solutions' },
     ],
   },
   {
     label: 'Company',
     links: [
       { title: 'About Us', href: '/about' },
-      { title: 'Our Work', href: '/portfolio' },
-      { title: 'Start a Project', href: '/start-project' },
+      { title: 'Portfolio', href: '/portfolio' },
+      { title: 'Business Needs Finder', href: '/start-project' },
       { title: 'Contact', href: '/contact' },
     ],
   },
@@ -116,15 +113,12 @@ export function FooterSection() {
         <div className="footer-section__grid">
           <AnimatedContainer className="footer-section__brand">
             <Link to="/" aria-label={`${COMPANY_NAME} home`}>
-              <img
-                src={logo}
-                alt={COMPANY_NAME}
-                className="footer-section__logo"
-              />
+              <img src={logo} alt={COMPANY_NAME} className="footer-section__logo" />
             </Link>
             <p className="footer-section__tagline">{COMPANY_TAGLINE}</p>
+            <p className="footer-section__contact-meta">Boston, US · Ahmedabad, Gujarat</p>
             <p className="footer-section__contact-meta">
-              Boston, US · Ahmedabad, Gujarat
+              We help businesses identify what they need, build it, and grow with it.
             </p>
             <p className="footer-section__copy">
               © {new Date().getFullYear()} {COMPANY_NAME}. All rights reserved.
@@ -151,6 +145,6 @@ export function FooterSection() {
           </motion.div>
         </div>
       </div>
-      </motion.footer>
+    </motion.footer>
   )
 }

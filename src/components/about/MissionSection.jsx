@@ -1,24 +1,24 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Rocket, ShieldCheck, Lightbulb } from 'lucide-react'
+import { Compass, ShieldCheck, Handshake } from 'lucide-react'
 import SectionHeading from '@components/ui/SectionHeading'
 import { STAGGER_CONTAINER, FADE_UP } from '@utils/constants'
 
 const VALUES = [
   {
-    icon: Rocket,
-    title: 'Outcome-Driven Execution',
-    desc: 'We focus on measurable product and business outcomes from day one.',
+    icon: Compass,
+    title: 'Business-First Guidance',
+    desc: 'We start with your goals, not technical buzzwords, so every recommendation makes sense for the business.',
   },
   {
     icon: ShieldCheck,
-    title: 'Reliable Delivery',
-    desc: 'Clear milestones, transparent communication, and dependable implementation.',
+    title: 'Trustworthy Delivery',
+    desc: 'Clear timelines, transparent communication, and dependable execution from planning to launch.',
   },
   {
-    icon: Lightbulb,
-    title: 'Product Thinking',
-    desc: 'We combine UX, engineering, and strategy to build products users actually love.',
+    icon: Handshake,
+    title: 'Long-Term Partnership',
+    desc: 'We stay involved to improve, maintain, and grow the systems that keep your business moving forward.',
   },
 ]
 
@@ -36,22 +36,24 @@ const MissionSection = () => {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             ref={ref}
           >
-            <SectionHeading tag="Our Story" heading="A Modern Approach to Digital Growth" />
+            <SectionHeading tag="Our Story" heading="A Consultancy Approach Built for Growing Businesses" />
             <div className="mission__story-body">
               <p>
-                ModernMind Solutions was built to help growing businesses launch, modernize,
-                and scale their digital products with confidence.
+                Modern Mind Solutions was built for business owners who want to grow online
+                without having to become technology experts first.
               </p>
               <p>
-                From websites and mobile apps to AI automation and enterprise implementations,
-                we deliver end-to-end solutions tailored to your goals.
+                We help clients identify what they actually need, whether that means a
+                professional website, better marketing, smarter automation, an app, or a more
+                complete digital system.
               </p>
               <p>
-                Our team works as an extension of yours: collaborative, fast-moving, and deeply
-                invested in quality at every stage.
+                Our role is part consultant, part advisor, and part delivery partner. We keep
+                the process simple, explain things clearly, and focus on business outcomes.
               </p>
               <p>
-                Our mission is simple: turn ambitious ideas into high-performing digital experiences.
+                Our mission is simple: help businesses identify what they need, build it, and
+                grow with it.
               </p>
             </div>
           </motion.div>

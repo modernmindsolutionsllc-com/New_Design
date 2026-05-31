@@ -18,20 +18,20 @@ const CTABanner = () => {
           animate={inView ? 'visible' : 'hidden'}
         >
           <motion.span className="section-tag cta-banner__tag" variants={FADE_UP}>
-            Ready When You Are
+            Not Sure Where To Start?
           </motion.span>
           <motion.h2 className="cta-banner__heading" variants={FADE_UP}>
-            Get Started With ModernMind Today
+            Tell Us About Your Business and We&apos;ll Recommend the Right Next Step
           </motion.h2>
           <motion.p className="cta-banner__subline" variants={FADE_UP}>
-            Reach out for support and we will help you schedule the right service.
+            Use our Business Needs Finder or book a free consultation to get clear, practical guidance without the tech overwhelm.
           </motion.p>
           <motion.div className="cta-banner__actions" variants={FADE_UP}>
             <Link to="/start-project" className="btn btn--primary btn--lg cta-banner__primary">
-              Schedule Today <ArrowRight size={18} />
+              Start My Business Journey <ArrowRight size={18} />
             </Link>
             <Link to="/contact" className="btn btn--ghost btn--lg cta-banner__secondary">
-              Contact Us
+              Get Free Consultation
             </Link>
           </motion.div>
         </motion.div>
@@ -54,7 +54,9 @@ style.textContent = `
 .cta-banner__bg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 50%, rgba(245, 180, 0, 0.1) 0%, transparent 65%);
+  background:
+    radial-gradient(circle at 18% 22%, rgba(14, 90, 160, 0.12) 0%, transparent 30%),
+    radial-gradient(ellipse at 72% 52%, rgba(245, 180, 0, 0.12) 0%, transparent 65%);
   pointer-events: none;
 }
 .cta-banner__inner {
@@ -74,13 +76,13 @@ style.textContent = `
   font-size: clamp(2rem, 4vw, 3.25rem);
   font-weight: 700;
   color: var(--color-text-primary);
-  max-width: 640px;
+  max-width: 760px;
   line-height: 1.15;
 }
 .cta-banner__subline {
   font-size: var(--text-lg);
   color: var(--color-text-secondary);
-  max-width: 560px;
+  max-width: 640px;
   line-height: 1.65;
 }
 .cta-banner__actions {

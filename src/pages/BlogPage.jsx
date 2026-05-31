@@ -15,10 +15,11 @@ const BlogPage = () => {
         <div className="container">
           <motion.div className="page-hero__inner" variants={STAGGER_CONTAINER} initial="hidden" animate="visible">
             <motion.span className="section-tag" variants={FADE_UP}>Insights</motion.span>
-            <motion.h1 className="page-hero__heading" variants={FADE_UP}>ModernMind Blog</motion.h1>
+            <motion.h1 className="page-hero__heading" variants={FADE_UP}>Business Growth Insights</motion.h1>
             <div className="gold-divider" />
             <motion.p className="page-hero__sub" variants={FADE_UP}>
-              Practical product, engineering, and growth insights for founders and teams.
+              Practical guidance for business owners planning websites, marketing, automation,
+              and digital growth without the technical overwhelm.
             </motion.p>
           </motion.div>
         </div>

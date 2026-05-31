@@ -1,29 +1,32 @@
 import { useState } from 'react'
-import { useForm } from '@formspree/react'
 import { motion } from 'framer-motion'
-import { Mail, Globe, MapPin, Send, Loader2 } from 'lucide-react'
+import { Mail, Globe, MapPin, Send, Loader2, CalendarCheck2 } from 'lucide-react'
 import {
   CONTACT_EMAIL,
   STAGGER_CONTAINER,
   FADE_UP,
 } from '@utils/constants'
 import { validateEmail, validateName, validateRequired } from '@utils/formHelpers'
-import { FORMSPREE_ENDPOINT } from '@components/questionnaire/formspreeConfig'
+import { submitToFormspree } from '@components/questionnaire/formspreeConfig'
 
 const CONTACT_METHODS = [
-  { icon: Mail, label: 'Email Us', value: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
+  { icon: Mail, label: 'Email', value: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
   { icon: Globe, label: 'Company', value: 'Modern Mind Solutions LLC', href: null },
-  { icon: MapPin, label: 'Boston', value: 'Modern Mind Solutions LLC, Boston, US', href: null },
-  { icon: MapPin, label: 'Ahmedabad', value: 'Modern Mind Solutions, Ahmedabad, Gujarat', href: null },
+  { icon: MapPin, label: 'Boston', value: 'Boston, US', href: null },
+  { icon: MapPin, label: 'Ahmedabad', value: 'Ahmedabad, Gujarat', href: null },
 ]
 
 const ContactPage = () => {
-  const [formState, submitToFormspree] = useForm(FORMSPREE_ENDPOINT)
   const [fields, setFields] = useState({ name: '', email: '', subject: '', message: '' })
   const [errors, setErrors] = useState({})
+  const [submitState, setSubmitState] = useState({
+    submitting: false,
+    succeeded: false,
+    error: '',
+  })
 
-  const update = (key, val) => {
-    setFields((prev) => ({ ...prev, [key]: val }))
+  const update = (key, value) => {
+    setFields((prev) => ({ ...prev, [key]: value }))
     setErrors((prev) => {
       const next = { ...prev }
       delete next[key]
@@ -32,28 +35,38 @@ const ContactPage = () => {
   }
 
   const validate = () => {
-    const e = {}
-    const n = validateName(fields.name)
-    if (!n.valid) e.name = n.message
-    const em = validateEmail(fields.email)
-    if (!em.valid) e.email = em.message
-    const m = validateRequired(fields.message, 'Message')
-    if (!m.valid) e.message = m.message
-    return e
+    const nextErrors = {}
+    const nameResult = validateName(fields.name)
+    if (!nameResult.valid) nextErrors.name = nameResult.message
+    const emailResult = validateEmail(fields.email)
+    if (!emailResult.valid) nextErrors.email = emailResult.message
+    const messageResult = validateRequired(fields.message, 'Message')
+    if (!messageResult.valid) nextErrors.message = messageResult.message
+    return nextErrors
   }
 
-  const handleSubmit = async (ev) => {
-    ev.preventDefault()
-    const e = validate()
-    if (Object.keys(e).length) {
-      setErrors(e)
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    const nextErrors = validate()
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors)
       return
     }
-    await submitToFormspree({
+    setSubmitState({ submitting: true, succeeded: false, error: '' })
+    const result = await submitToFormspree({
       ...fields,
       _subject: `Contact request: ${fields.subject || 'General inquiry'} from ${fields.name}`,
       _replyto: fields.email,
     })
+
+    if (result.ok) {
+      setFields({ name: '', email: '', subject: '', message: '' })
+      setSubmitState({ submitting: false, succeeded: true, error: '' })
+      return
+    }
+
+    const message = result.errors?.[0]?.message || 'Something went wrong while sending your message.'
+    setSubmitState({ submitting: false, succeeded: false, error: message })
   }
 
   return (
@@ -62,11 +75,11 @@ const ContactPage = () => {
         <div className="container">
           <motion.div className="page-hero__inner" variants={STAGGER_CONTAINER} initial="hidden" animate="visible">
             <motion.span className="section-tag" variants={FADE_UP}>Get in Touch</motion.span>
-            <motion.h1 className="page-hero__heading" variants={FADE_UP}>Contact Us</motion.h1>
+            <motion.h1 className="page-hero__heading" variants={FADE_UP}>Let&apos;s Talk About What Your Business Needs</motion.h1>
             <div className="gold-divider" />
             <motion.p className="page-hero__sub" variants={FADE_UP}>
-              Questions before starting? Email or call us today. A team member typically follows up
-              within 2-4 hours on weekdays.
+              Whether you need a website, more leads, a smoother booking process, or a clearer
+              digital plan, we&apos;re here to help you move forward with confidence.
             </motion.p>
           </motion.div>
         </div>
@@ -105,8 +118,8 @@ const ContactPage = () => {
               ))}
 
               <div className="contact-page__response-badge">
-                <span className="contact-page__response-dot" />
-                We typically respond within <strong>2-4 hours</strong> on weekdays
+                <CalendarCheck2 size={16} />
+                We typically respond within <strong>24 hours</strong> on weekdays
               </div>
             </motion.div>
 
@@ -116,15 +129,15 @@ const ContactPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              {formState.succeeded ? (
+              {submitState.succeeded ? (
                 <div className="contact-page__success">
-                  <div className="contact-page__success-icon">OK</div>
+                  <div className="contact-page__success-icon">✓</div>
                   <h3>Message received</h3>
-                  <p>Thanks for reaching out. We will contact you shortly.</p>
+                  <p>Thanks for reaching out. We will contact you shortly with the next best step.</p>
                 </div>
               ) : (
                 <form className="contact-form" onSubmit={handleSubmit} noValidate>
-                  <h2 className="contact-form__heading">Send a message</h2>
+                  <h2 className="contact-form__heading">Tell us about your goals</h2>
 
                   <div className="contact-form__row">
                     <div className={`form-field ${errors.name ? 'form-field--error' : ''}`}>
@@ -137,7 +150,7 @@ const ContactPage = () => {
                         className="form-field__input"
                         placeholder="Alex Johnson"
                         value={fields.name}
-                        onChange={(e) => update('name', e.target.value)}
+                        onChange={(event) => update('name', event.target.value)}
                       />
                       {errors.name && <span className="form-field__error">{errors.name}</span>}
                     </div>
@@ -152,7 +165,7 @@ const ContactPage = () => {
                         className="form-field__input"
                         placeholder="you@email.com"
                         value={fields.email}
-                        onChange={(e) => update('email', e.target.value)}
+                        onChange={(event) => update('email', event.target.value)}
                       />
                       {errors.email && <span className="form-field__error">{errors.email}</span>}
                     </div>
@@ -166,9 +179,9 @@ const ContactPage = () => {
                       id="c-subject"
                       type="text"
                       className="form-field__input"
-                      placeholder="Question about services"
+                      placeholder="Website, bookings, marketing, or automation"
                       value={fields.subject}
-                      onChange={(e) => update('subject', e.target.value)}
+                      onChange={(event) => update('subject', event.target.value)}
                     />
                   </div>
 
@@ -180,24 +193,27 @@ const ContactPage = () => {
                       id="c-message"
                       className="form-field__input form-field__textarea"
                       rows={5}
-                      placeholder="Tell us about your project goals..."
+                      placeholder="Tell us about your business, what you need help with, and what kind of result you want."
                       value={fields.message}
-                      onChange={(e) => update('message', e.target.value)}
+                      onChange={(event) => update('message', event.target.value)}
                     />
                     {errors.message && <span className="form-field__error">{errors.message}</span>}
                   </div>
 
-                  <button type="submit" className="contact-form__submit" disabled={formState.submitting}>
-                    {formState.submitting ? (
+                  <button type="submit" className="contact-form__submit" disabled={submitState.submitting}>
+                    {submitState.submitting ? (
                       <>
                         <Loader2 size={16} className="questionnaire__spinner" /> Sending...
                       </>
                     ) : (
                       <>
-                        <Send size={16} /> Send Request
+                        <Send size={16} /> Send Message
                       </>
                     )}
                   </button>
+                  {submitState.error && (
+                    <div className="questionnaire__api-error">{submitState.error}</div>
+                  )}
                 </form>
               )}
             </motion.div>
@@ -272,7 +288,6 @@ style.textContent = `
 .contact-method-card-v2__value--link:hover {
   color: var(--color-gold);
 }
-
 .contact-page__response-badge {
   display: flex;
   align-items: center;
@@ -284,25 +299,6 @@ style.textContent = `
   background: var(--color-bg-subtle);
   border-radius: var(--radius-md);
 }
-.contact-page__response-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--color-success);
-  flex-shrink: 0;
-  box-shadow: 0 0 0 3px rgba(46, 125, 82, 0.15);
-  animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
 .contact-page__form-wrap {
   background: var(--color-bg-white);
   border: 1px solid var(--color-border);
@@ -351,7 +347,6 @@ style.textContent = `
   opacity: 0.7;
   cursor: not-allowed;
 }
-
 .contact-page__success {
   display: flex;
   flex-direction: column;
@@ -382,7 +377,6 @@ style.textContent = `
   font-size: var(--text-base);
   color: var(--color-text-secondary);
 }
-
 @media (max-width: 900px) {
   .contact-page__layout {
     grid-template-columns: 1fr;

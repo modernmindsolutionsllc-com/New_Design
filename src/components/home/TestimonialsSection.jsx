@@ -64,7 +64,7 @@ style.textContent = `
   margin-top: var(--space-12);
 }
 .testimonial-card {
-  background: #e2e8f0;
+  background: linear-gradient(180deg, var(--color-bg-white), color-mix(in srgb, var(--color-bg-white) 84%, var(--color-bg-subtle) 16%));
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-8);

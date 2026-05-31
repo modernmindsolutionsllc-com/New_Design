@@ -20,7 +20,7 @@ const SuccessScreen = ({ clientName, onReset }) => (
         We have your request{clientName ? `, ${clientName.split(' ')[0]}` : ''}!
       </h2>
       <p className="success-screen__message">
-        Our team will review it and follow up within <strong>24 hours</strong>, usually sooner.
+        Our team will review your answers, refine the recommended plan, and follow up within <strong>24 hours</strong>, usually sooner.
       </p>
     </motion.div>
 

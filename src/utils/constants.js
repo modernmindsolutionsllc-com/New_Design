@@ -1,7 +1,7 @@
 export const COMPANY_NAME = 'ModernMind Solutions LLC'
-export const COMPANY_TAGLINE = 'Innovative technology solutions for modern businesses.'
+export const COMPANY_TAGLINE = 'Complete IT & digital solutions for growing businesses.'
 export const COMPANY_DESCRIPTION =
-  'Modern, performant web solutions that help businesses stand out and grow faster.'
+  'We help businesses identify what they need, build it, and grow with it.'
 
 export const CONTACT_EMAIL =
   import.meta.env.VITE_CONTACT_EMAIL || 'hr_services@modernmindsolutionsllc.com'
@@ -29,15 +29,15 @@ export const NAV_LINKS = [
     label: 'Services',
     path: '/services',
     dropdown: [
-      { label: 'Web Development', path: '/services#web-development' },
-      { label: 'Mobile Apps', path: '/services#mobile-apps' },
-      { label: 'AI & Automation', path: '/services#ai-automation' },
-      { label: 'UI/UX Design', path: '/services#ui-ux-design' },
-      { label: 'Oracle Fusion HCM Implementation', path: '/services#oracle-hcm-implementation' },
-      { label: 'Oracle Fusion HCM - Managed Services', path: '/services#oracle-hcm-managed-services' },
+      { label: 'Website Development', path: '/services#website-development' },
+      { label: 'Mobile App Development', path: '/services#mobile-app-development' },
+      { label: 'Social Media Marketing', path: '/services#social-media-marketing' },
+      { label: 'Branding & Design', path: '/services#branding-design' },
+      { label: 'Business Automation', path: '/services#business-automation' },
+      { label: 'AI Solutions', path: '/services#ai-solutions' },
     ],
   },
-  { label: 'Work', path: '/portfolio' },
+  { label: 'Portfolio', path: '/portfolio' },
   { label: 'Blog', path: '/blog' },
   { label: 'Contact', path: '/contact' },
 ]
@@ -55,61 +55,78 @@ export const ROUTES = {
 }
 
 export const FORM_STEPS = [
-  { step: 1, label: 'About You' },
-  { step: 2, label: 'Project Scope' },
-  { step: 3, label: 'Timeline + Budget' },
-  { step: 4, label: 'Contact Preference' },
+  { step: 1, label: 'Your Business' },
+  { step: 2, label: 'What You Need' },
+  { step: 3, label: 'Your Stage' },
+  { step: 4, label: 'Recommendations' },
 ]
 
 export const SERVICE_TYPES = [
-  { id: 'web-development', label: 'Web Development', emoji: 'WD' },
-  { id: 'mobile-apps', label: 'Mobile Apps', emoji: 'MA' },
-  { id: 'ai-automation', label: 'AI & Automation', emoji: 'AI' },
-  { id: 'ui-ux-design', label: 'UI/UX Design', emoji: 'UX' },
-  { id: 'oracle-hcm', label: 'Oracle Fusion HCM', emoji: 'OR' },
-  { id: 'not-sure', label: 'Not Sure Yet', emoji: '?' },
+  { id: 'more-customers', label: 'More customers', emoji: 'MC' },
+  { id: 'website', label: 'Website', emoji: 'WS' },
+  { id: 'mobile-app', label: 'Mobile app', emoji: 'APP' },
+  { id: 'online-booking', label: 'Online booking', emoji: 'BK' },
+  { id: 'social-media-marketing', label: 'Social media marketing', emoji: 'SM' },
+  { id: 'branding', label: 'Branding', emoji: 'BR' },
+  { id: 'automation', label: 'Automation', emoji: 'AU' },
+  { id: 'online-payments', label: 'Online payments', emoji: 'PAY' },
+  { id: 'appointment-system', label: 'Appointment system', emoji: 'APT' },
+  { id: 'ai-solutions', label: 'AI solutions', emoji: 'AI' },
+  { id: 'seo-google-ranking', label: 'SEO / Google ranking', emoji: 'SEO' },
 ]
 
 export const FEATURE_OPTIONS = [
-  'User Login & Access Control',
-  'Payment Integration',
-  'Admin Dashboard',
-  'Third-party Integrations',
-  'Analytics & Reporting',
-  'Responsive Mobile UX',
-  'Multi-language Support',
-  'Push Notifications',
-  'AI-powered Features',
-  'Cloud Deployment Setup',
+  'Contact form or lead capture',
+  'Online booking calendar',
+  'Online payments',
+  'Customer dashboard',
+  'Google Maps or local listings',
+  'WhatsApp or live chat',
+  'Social media integration',
+  'Reviews and testimonials',
+  'AI assistant or chatbot',
+  'Reporting and analytics',
+]
+
+export const BUSINESS_TYPE_OPTIONS = [
+  'Startup',
+  'Restaurant',
+  'Clinic',
+  'Salon',
+  'Retail Store',
+  'Real Estate',
+  'Education',
+  'E-Commerce',
+  'Fitness',
+  'Construction',
+  'Other',
+]
+
+export const BUSINESS_STAGE_OPTIONS = [
+  'Just starting',
+  'Growing',
+  'Already established',
+  'Need modernization',
 ]
 
 export const TIMELINE_OPTIONS = [
   'As soon as possible',
-  'Within 1-2 months',
-  'Within 3-6 months',
+  'Within 30 days',
+  'Within 2-3 months',
   'Flexible timeline',
 ]
 
 export const BUDGET_OPTIONS = [
-  '$1 - $100',
-  '$100 - $200',
-  '$200 - $500',
-  '$500 - $1000',
-  '$1000 - $10000',
-]
-
-export const ROLE_OPTIONS = [
-  'Founder / Co-founder',
-  'Business Owner',
-  'Product Manager',
-  'CTO / Tech Lead',
-  'Operations Manager',
-  'Other',
+  'Under $1,000',
+  '$1,000 - $3,000',
+  '$3,000 - $7,500',
+  '$7,500 - $15,000',
+  '$15,000+',
 ]
 
 export const CONTACT_METHOD_OPTIONS = [
-  { id: 'email', label: 'Email', emoji: 'EMAIL' },
-  { id: 'phone', label: 'Phone Call', emoji: 'CALL' },
+  { id: 'email', label: 'Email', emoji: '✉️' },
+  { id: 'phone', label: 'Strategy call', emoji: '📞' },
 ]
 
 export const BEST_TIME_OPTIONS = [

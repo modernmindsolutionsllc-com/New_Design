@@ -116,7 +116,7 @@ const Navbar = ({ theme, toggleTheme }) => {
               {isDarkTheme ? <Sun size={17} /> : <Moon size={17} />}
             </button>
             <Link to="/start-project" className="navbar__cta">
-              Schedule Today
+              Book Consultation
             </Link>
             <button
               type="button"
@@ -193,7 +193,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                   unlockBodyScroll()
                 }}
               >
-                Schedule Today
+                Book Consultation
               </Link>
             </div>
           </motion.div>

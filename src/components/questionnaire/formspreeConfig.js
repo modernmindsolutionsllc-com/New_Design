@@ -1,32 +1,47 @@
-// ─────────────────────────────────────────────────────────────────────────────
-//  FORMSPREE CONFIG
-//  Single source of truth for the Formspree endpoint.
-//  The actual URL is stored in .env — never hardcoded here.
-//
-//  Setup steps:
-//  1. Go to https://formspree.io and create a free account
-//  2. Create a new form — you'll get a URL like: https://formspree.io/f/xyzabcde
-//  3. Copy your form ID (the part after /f/)
-//  4. In your .env file: VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_ID
-//  5. Done — submissions will arrive in your email automatically
-// ─────────────────────────────────────────────────────────────────────────────
-
 export const FORMSPREE_ENDPOINT =
   import.meta.env.VITE_FORMSPREE_ENDPOINT || 'https://formspree.io/f/mqenrkpq'
 
-/**
- * Formspree special fields config.
- * These hidden fields control Formspree's email behaviour.
- * Include these in the form submission object.
- *
- * @param {string} clientName - Used to personalise the email subject line
- * @param {string} clientEmail - Set as the reply-to address
- * @returns {Object}
- */
+export const getFormspreeSubmitUrl = () => (
+  FORMSPREE_ENDPOINT.startsWith('http')
+    ? FORMSPREE_ENDPOINT
+    : `https://formspree.io/f/${FORMSPREE_ENDPOINT}`
+)
+
 export const getFormspreeMetaFields = (clientName, clientEmail) => ({
   _subject: `New Project Request from ${clientName || 'Website Visitor'}`,
   _replyto: clientEmail || '',
-  // Redirect after submission is handled in React (SuccessScreen),
-  // so we disable Formspree's default redirect
   _next: 'false',
 })
+
+export const submitToFormspree = async (payload) => {
+  const formData = new FormData()
+
+  Object.entries(payload).forEach(([key, value]) => {
+    if (value === undefined || value === null || value === '') return
+    formData.append(key, value)
+  })
+
+  const response = await fetch(getFormspreeSubmitUrl(), {
+    method: 'POST',
+    body: formData,
+    headers: {
+      Accept: 'application/json',
+    },
+  })
+
+  let data = {}
+  try {
+    data = await response.json()
+  } catch {
+    data = {}
+  }
+
+  if (!response.ok) {
+    return {
+      ok: false,
+      errors: data.errors || [{ message: 'Submission failed. Please try again.' }],
+    }
+  }
+
+  return { ok: true, data }
+}

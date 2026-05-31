@@ -11,11 +11,11 @@ const AboutPage = () => (
       <div className="container">
         <motion.div className="page-hero__inner" variants={FADE_UP} initial="hidden" animate="visible">
           <span className="section-tag">Who We Are</span>
-          <h1 className="page-hero__heading">Modern Problems Deserve Modern Minds</h1>
+          <h1 className="page-hero__heading">Your Digital Growth Partner, Not Just Another Tech Vendor</h1>
           <div className="gold-divider" />
           <p className="page-hero__sub">
-            We bridge great design and powerful engineering, partnering with startups and
-            enterprises to turn ambitious ideas into reality.
+            We help businesses understand what they need, choose the right digital path,
+            and move forward with expert guidance from strategy to launch.
           </p>
         </motion.div>
       </div>
