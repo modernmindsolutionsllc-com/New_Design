@@ -424,6 +424,19 @@ textarea {
   box-shadow: 0 18px 40px rgba(8, 15, 40, 0.08);
 }
 
+.hero__visual,
+.hero__visual :is(h1, h2, h3, h4, h5, h6, p, span, strong, a) {
+  color: #0f172a;
+}
+
+.hero__visual [class*='card'] {
+  color: #0f172a;
+}
+
+.hero__visual [class*='card'] p:last-child {
+  color: #475569;
+}
+
 [class*='question-card'],
 [class*='option-card'],
 [class*='form__section'] {

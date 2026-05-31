@@ -12,7 +12,7 @@ import { submitToFormspree } from '@components/questionnaire/formspreeConfig'
 const CONTACT_METHODS = [
   { icon: Mail, label: 'Email', value: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
   { icon: Globe, label: 'Company', value: 'Modern Mind Solutions LLC', href: null },
-  { icon: MapPin, label: 'Boston', value: 'Boston, US', href: null },
+  { icon: MapPin, label: 'Boston', value: 'Boston, Massachusetts, US', href: null },
   { icon: MapPin, label: 'Ahmedabad', value: 'Ahmedabad, Gujarat', href: null },
 ]
 
