@@ -1,6 +1,15 @@
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
-import { Facebook, Instagram, Linkedin, Mail, Twitter } from 'lucide-react'
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  MessageCircle,
+  Music2,
+  Twitter,
+  Youtube,
+} from 'lucide-react'
 import {
   COMPANY_ADDRESS,
   COMPANY_NAME,
@@ -46,6 +55,9 @@ const footerLinks = [
       { title: 'Facebook', href: SOCIAL_LINKS.facebook, icon: Facebook, external: true },
       { title: 'Instagram', href: SOCIAL_LINKS.instagram, icon: Instagram, external: true },
       { title: 'X', href: SOCIAL_LINKS.x, icon: Twitter, external: true },
+      { title: 'TikTok', href: SOCIAL_LINKS.tiktok, icon: Music2, external: true },
+      { title: 'Threads', href: SOCIAL_LINKS.threads, icon: MessageCircle, external: true },
+      { title: 'YouTube', href: SOCIAL_LINKS.youtube, icon: Youtube, external: true },
       { title: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}`, icon: Mail, external: true },
     ],
   },

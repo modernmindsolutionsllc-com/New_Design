@@ -19,6 +19,9 @@ export const SOCIAL_LINKS = {
   instagram: 'https://www.instagram.com/hr_services2026/',
   facebook: 'https://www.facebook.com/people/Modern-Mind-Solutions-LLC/61590709372615/',
   x: 'https://x.com/ModernMindSols',
+  tiktok: 'https://www.tiktok.com/@modernminditsolutions',
+  threads: 'https://www.threads.com/@modernmindsolutionsllc?hl=en',
+  youtube: 'https://www.youtube.com/@ModernMindSolutionsllc',
 }
 
 export const NAV_LINKS = [
@@ -50,6 +53,8 @@ export const ROUTES = {
   BLOG_POST: '/blog/:slug',
   START_PROJECT: '/start-project',
   CONTACT: '/contact',
+  PRIVACY: '/privacy',
+  TERMS: '/terms',
   NOT_FOUND: '*',
 }
 

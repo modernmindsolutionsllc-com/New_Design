@@ -2,13 +2,11 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
-import ScrollToTop from '@components/ui/ScrollToTop'
 import { useTheme } from '@hooks/useTheme'
 
 /**
  * Layout — wraps every page.
  * Renders: Navbar → page content (via <Outlet />) → Footer
- * Also mounts the floating ScrollToTop button.
  * Scrolls to top on every route change.
  */
 const Layout = () => {
@@ -27,7 +25,6 @@ const Layout = () => {
         <Outlet />
       </main>
       <Footer />
-      <ScrollToTop />
     </div>
   )
 }
