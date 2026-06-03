@@ -92,6 +92,18 @@ export const useMultiStepForm = () => {
     })
   }, [])
 
+  const setFieldError = useCallback((field, message) => {
+    setErrors((prev) => {
+      if (!message) {
+        if (!prev[field]) return prev
+        const next = { ...prev }
+        delete next[field]
+        return next
+      }
+      return { ...prev, [field]: message }
+    })
+  }, [])
+
   const validateCurrentStep = useCallback(() => {
     let stepErrors = {}
 
@@ -163,5 +175,6 @@ export const useMultiStepForm = () => {
     goToStep,
     resetForm,
     clearFieldError,
+    setFieldError,
   }
 }

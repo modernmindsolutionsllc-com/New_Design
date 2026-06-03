@@ -8,7 +8,8 @@ import StepThree from './StepThree'
 import StepFour from './StepFour'
 import SuccessScreen from './SuccessScreen'
 import { useMultiStepForm } from '@hooks/useMultiStepForm'
-import { serializeFormData } from '@utils/formHelpers'
+import QuestionnaireInsight from './QuestionnaireInsight'
+import { serializeFormData, getQuestionnaireInsight } from '@utils/formHelpers'
 import { submitToFormspree } from './formspreeConfig'
 
 const SLIDE_VARIANTS = {
@@ -25,7 +26,7 @@ const QuestionnaireForm = () => {
     error: '',
   })
   const [submittedName, setSubmittedName] = useState('')
-  const { currentStep, totalSteps, formData, errors, isFirstStep, isLastStep, progressPercent, updateField, updateFields, toggleArrayField, next, back, resetForm, clearFieldError } = useMultiStepForm()
+  const { currentStep, totalSteps, formData, errors, isFirstStep, isLastStep, progressPercent, updateField, updateFields, toggleArrayField, next, back, resetForm, clearFieldError, setFieldError } = useMultiStepForm()
 
   if (submitState.succeeded) {
     return (
@@ -63,7 +64,8 @@ const QuestionnaireForm = () => {
     setSubmitState({ submitting: false, succeeded: false, error: message })
   }
 
-  const props = { formData, errors, updateField, updateFields, toggleArrayField, clearFieldError }
+  const props = { formData, errors, updateField, updateFields, toggleArrayField, clearFieldError, setFieldError }
+  const insight = getQuestionnaireInsight(formData, currentStep)
 
   const renderStep = () => {
     switch (currentStep) {
@@ -87,6 +89,7 @@ const QuestionnaireForm = () => {
           </motion.div>
         </AnimatePresence>
       </div>
+      <QuestionnaireInsight insight={insight} />
       <div className="questionnaire__nav">
         {!isFirstStep && <button type="button" className="questionnaire__back-btn" onClick={() => { setDirection(-1); back() }} disabled={submitState.submitting}><ArrowLeft size={16} /> Back</button>}
         <div style={{ flex: 1 }} />

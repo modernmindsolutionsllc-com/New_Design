@@ -207,9 +207,9 @@ const StepTwo = ({ formData, errors, updateField, updateFields, toggleArrayField
   return (
     <motion.div className="form-step" variants={STAGGER_CONTAINER} initial="hidden" animate="visible">
       <motion.div className="form-step__header" variants={FADE_UP}>
-        <h2 className="form-step__title">What are you looking for right now?</h2>
+        <h2 className="form-step__title">What feels most important to fix or build next?</h2>
         <p className="form-step__sub">
-          Choose the outcomes you care about most. We&apos;ll turn that into a practical plan for your business.
+          Pick the outcomes pulling at you right now. We&apos;ll start shaping a likely direction before you even finish the form.
         </p>
       </motion.div>
 

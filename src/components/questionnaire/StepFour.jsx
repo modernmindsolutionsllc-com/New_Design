@@ -39,9 +39,9 @@ const StepFour = ({ formData, errors, updateField, clearFieldError }) => {
       animate="visible"
     >
       <motion.div className="form-step__header" variants={FADE_UP}>
-        <h2 className="form-step__title">Your recommended next steps</h2>
+        <h2 className="form-step__title">Here&apos;s the direction we&apos;d explore first</h2>
         <p className="form-step__sub">
-          Based on what you shared, these are the areas we&apos;d likely guide you toward first.
+          You&apos;re one step away from sending this. Review the live recommendation, then tell us the best way to reach you.
         </p>
       </motion.div>
 

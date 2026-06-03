@@ -6,9 +6,9 @@ import { STAGGER_CONTAINER, FADE_UP } from '@utils/constants'
 const StepThree = ({ formData, errors, updateField, clearFieldError }) => (
   <motion.div className="form-step" variants={STAGGER_CONTAINER} initial="hidden" animate="visible">
     <motion.div className="form-step__header" variants={FADE_UP}>
-      <h2 className="form-step__title">What stage is your business in?</h2>
+      <h2 className="form-step__title">How fast should this move, and how big should it start?</h2>
       <p className="form-step__sub">
-        This helps us recommend the right timeline, scope, and level of support for where your business is today.
+        This is where your answers get practical. We&apos;ll use your stage, timing, and budget to narrow the right first version.
       </p>
     </motion.div>
 

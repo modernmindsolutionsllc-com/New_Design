@@ -28,7 +28,6 @@ const PortfolioPreview = () => {
                 <div className="portfolio-card__result"><TrendingUp size={14} className="portfolio-card__result-icon" /><span>{result}</span></div>
                 <p className="portfolio-card__problem"><strong>Business challenge:</strong> {problem}</p>
                 <div className="portfolio-card__tags">{tags.map((tag) => <span key={tag} className="portfolio-card__tag">{tag}</span>)}</div>
-                <Link to="/portfolio" className="portfolio-card__link">Learn Details <ArrowRight size={14} /></Link>
               </div>
             </motion.div>
           ))}
@@ -59,8 +58,6 @@ style.textContent = `
 .portfolio-card__problem { font-size: var(--text-sm); color: var(--color-text-secondary); line-height: 1.55; }
 .portfolio-card__tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: auto; }
 .portfolio-card__tag { font-size: var(--text-xs); font-family: var(--font-body); background: var(--color-bg-subtle); color: var(--color-text-secondary); border: 1px solid var(--color-border); padding: 0.2rem 0.6rem; border-radius: var(--radius-full); }
-.portfolio-card__link { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); font-weight: 600; color: var(--color-gold); text-decoration: none; transition: var(--transition-base); }
-.portfolio-card__link:hover { color: var(--color-gold-dark); }
 @media (max-width: 900px) { .portfolio-preview__grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .portfolio-preview__grid { grid-template-columns: 1fr; } }
 `

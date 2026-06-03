@@ -121,11 +121,11 @@ export const TIMELINE_OPTIONS = [
 ]
 
 export const BUDGET_OPTIONS = [
-  'Under $1,000',
-  '$1,000 - $3,000',
-  '$3,000 - $7,500',
-  '$7,500 - $15,000',
-  '$15,000+',
+  '$50 - $100',
+  '$100 - $500',
+  '$500 - $1,000',
+  '$1,000 - $5,000',
+  '>$5,000',
 ]
 
 export const CONTACT_METHOD_OPTIONS = [

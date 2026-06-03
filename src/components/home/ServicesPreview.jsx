@@ -42,7 +42,6 @@ const ServicesPreview = () => {
                 <ul className="service-card__list">
                   {subServices.map((item) => <li key={item} className="service-card__item"><CheckCircle2 size={14} className="service-card__check" />{item}</li>)}
                 </ul>
-                <Link to="/start-project" className="service-card__link">Learn more <ArrowRight size={14} /></Link>
               </motion.div>
             )
           })}
@@ -75,8 +74,6 @@ style.textContent = `
 .service-card__list { display: flex; flex-direction: column; gap: var(--space-2); flex: 1; }
 .service-card__item { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); color: var(--color-text-secondary); }
 .service-card__check { color: var(--color-gold); flex-shrink: 0; }
-.service-card__link { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); font-weight: 600; color: var(--color-gold); text-decoration: none; margin-top: auto; transition: var(--transition-base); }
-.service-card__link:hover { color: var(--color-gold-dark); gap: var(--space-3); }
 @media (max-width: 1024px) { .services-preview__grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .services-preview__grid { grid-template-columns: 1fr; } .services-preview__header { flex-direction: column; } .services-preview__consult-card { max-width: 100%; } }
 `
