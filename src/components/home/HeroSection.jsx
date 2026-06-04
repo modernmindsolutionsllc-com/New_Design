@@ -21,16 +21,14 @@ const HeroSection = () => (
       <motion.div className="hero__content" variants={STAGGER_CONTAINER} initial="hidden" animate="visible">
         <motion.span className="section-tag" variants={FADE_UP}>TECHNOLOGY SIMPLIFIED FOR BUSINESSES</motion.span>
         <motion.h1 className="hero__heading" variants={FADE_UP}>
-          Everything Your Business Needs
-          <span className="hero__heading--accent">To Grow Digitally.</span>
+          Your Customers Are Searching.
+          <span className="hero__heading--accent">Can They Find You?</span>
         </motion.h1>
         <motion.p className="hero__subline" variants={FADE_UP}>
-          From websites and mobile apps to online marketing and automation, Modern Mind
-          Solutions helps businesses build, launch, and scale with confidence.
+          Every day without a strong online presence, you're losing customers to competitors who showed up first. We fix that — fast, simple, no tech skills needed.
         </motion.p>
         <motion.div className="hero__actions" variants={FADE_UP}>
           <Link to="/start-project" className="btn btn--primary btn--lg hero__cta-primary">Start My Business Journey<ArrowRight size={18} /></Link>
-          <Link to="/contact" className="btn btn--ghost btn--lg hero__cta-secondary">Get Free Consultation</Link>
           <Link to="/start-project" className="btn btn--ghost btn--lg hero__cta-secondary">Find What My Business Needs</Link>
         </motion.div>
         <motion.ul className="hero__highlights" variants={FADE_UP}>

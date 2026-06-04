@@ -100,22 +100,8 @@ const formatAnswer = (value, fallback = 'Not provided') => {
 
 export const validateStep2 = (data) => {
   const errors = {}
-  const serviceResult = validateCheckboxGroup(data.serviceTypes, 'Please select at least one service or goal.')
-  if (!serviceResult.valid) errors.serviceTypes = serviceResult.message
-  const presenceResult = validateRequired(data.onlinePresenceStatus, 'Please tell us whether you already have an online presence')
-  if (!presenceResult.valid) errors.onlinePresenceStatus = presenceResult.message
-
-  if (data.onlinePresenceStatus === 'yes') {
-    const answers = data.existingPresenceAnswers || {}
-    validateBranchArray(errors, 'existingPresenceAnswers', answers, 'biggestProblem', 'Please select at least one current problem.')
-    validateBranchRequired(errors, 'existingPresenceAnswers', answers, 'customerGoal', 'Please choose what you want customers to do more easily')
-  }
-
-  if (data.onlinePresenceStatus === 'no') {
-    const answers = data.newPresenceAnswers || {}
-    validateBranchRequired(errors, 'newPresenceAnswers', answers, 'launchType', 'Please select what you want to launch')
-    validateBranchRequired(errors, 'newPresenceAnswers', answers, 'firstPriority', 'Please choose the most important first priority')
-  }
+  const growthResult = validateCheckboxGroup(data.growthSelections, 'Please select at least one growth area to continue.')
+  if (!growthResult.valid) errors.growthSelections = growthResult.message
   return errors
 }
 
@@ -123,10 +109,6 @@ export const validateStep3 = (data) => {
   const errors = {}
   const stageResult = validateRequired(data.businessStage, 'Please select your business stage')
   if (!stageResult.valid) errors.businessStage = stageResult.message
-  const successVisionResult = validateRequired(data.successVision, 'Please describe what success would look like')
-  if (!successVisionResult.valid) errors.successVision = successVisionResult.message
-  const timelineResult = validateRequired(data.timeline, 'Please select a timeline')
-  if (!timelineResult.valid) errors.timeline = timelineResult.message
   const budgetResult = validateRequired(data.budget, 'Please select a budget range')
   if (!budgetResult.valid) errors.budget = budgetResult.message
   return errors
@@ -164,7 +146,6 @@ export const serializeFormData = (formData) => {
         ? 'No, does not have an online presence yet'
         : 'Not answered',
     'Business Stage': formData.businessStage || '',
-    'Success Vision (Next 3-6 Months)': formData.successVision || 'Not provided',
     Timeline: formData.timeline || '',
     'Budget Range': formData.budget || '',
     'Worked With Similar Agency Before': formData.workedBefore || 'Not answered',
@@ -385,9 +366,7 @@ export const getQuestionnaireInsight = (formData, currentStep) => {
     return {
       badge: 'Reality check in progress',
       title: 'We are now sizing the right first version, not just the ideal end state',
-      copy: formData.successVision
-        ? `Your success goal points us toward outcomes like "${formData.successVision.trim().slice(0, 90)}${formData.successVision.trim().length > 90 ? '...' : ''}".`
-        : 'This step helps us shape the recommendation around what your business can actually move on next.',
+      copy: 'This step helps us shape the recommendation around what your business can actually move on next.',
       suggestions: suggestions.slice(0, 3),
       nextTeaser: 'In the final step, you will see the starting direction we would explore first, plus the easiest way for us to follow up.',
     }

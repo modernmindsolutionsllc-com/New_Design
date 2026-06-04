@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { TIMELINE_OPTIONS, BUDGET_OPTIONS, REFERRAL_SOURCES, BUSINESS_STAGE_OPTIONS } from '@utils/constants'
+import { BUDGET_OPTIONS, REFERRAL_SOURCES, BUSINESS_STAGE_OPTIONS } from '@utils/constants'
 import { getFieldError, fieldHasError } from '@utils/formHelpers'
 import { STAGGER_CONTAINER, FADE_UP } from '@utils/constants'
 
@@ -36,51 +36,6 @@ const StepThree = ({ formData, errors, updateField, clearFieldError }) => (
         </div>
         {fieldHasError(errors, 'businessStage') && (
           <span className="form-field__error">{getFieldError(errors, 'businessStage')}</span>
-        )}
-      </div>
-
-      <div className={`form-field ${fieldHasError(errors, 'successVision') ? 'form-field--error' : ''}`}>
-        <label className="form-field__label" htmlFor="successVision">
-          If this project goes well, what would improve most in the next 3-6 months?
-          <span className="form-field__required">*</span>
-        </label>
-        <textarea
-          id="successVision"
-          className="form-field__input form-field__textarea"
-          rows={4}
-          placeholder="Example: More qualified leads, better first impressions, easier bookings, smoother daily operations, or more repeat customers."
-          value={formData.successVision}
-          onChange={(event) => updateField('successVision', event.target.value)}
-          onFocus={() => clearFieldError('successVision')}
-        />
-        {fieldHasError(errors, 'successVision') && (
-          <span className="form-field__error">{getFieldError(errors, 'successVision')}</span>
-        )}
-      </div>
-
-      <div className={`form-field ${fieldHasError(errors, 'timeline') ? 'form-field--error' : ''}`}>
-        <label className="form-field__label">
-          When do you want to get started?
-          <span className="form-field__required">*</span>
-        </label>
-        <div className="option-cards">
-          {TIMELINE_OPTIONS.map((option) => (
-            <button
-              key={option}
-              type="button"
-              className={`option-card ${formData.timeline === option ? 'option-card--selected' : ''}`}
-              onClick={() => {
-                updateField('timeline', option)
-                clearFieldError('timeline')
-              }}
-              aria-pressed={formData.timeline === option}
-            >
-              {option}
-            </button>
-          ))}
-        </div>
-        {fieldHasError(errors, 'timeline') && (
-          <span className="form-field__error">{getFieldError(errors, 'timeline')}</span>
         )}
       </div>
 

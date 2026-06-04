@@ -66,17 +66,17 @@ export const FORM_STEPS = [
 ]
 
 export const SERVICE_TYPES = [
-  { id: 'more-customers', label: 'More customers', emoji: 'MC' },
-  { id: 'website', label: 'Website', emoji: 'WS' },
-  { id: 'mobile-app', label: 'Mobile app', emoji: 'APP' },
-  { id: 'online-booking', label: 'Online booking', emoji: 'BK' },
-  { id: 'social-media-marketing', label: 'Social media marketing', emoji: 'SM' },
-  { id: 'branding', label: 'Branding', emoji: 'BR' },
-  { id: 'automation', label: 'Automation', emoji: 'AU' },
-  { id: 'online-payments', label: 'Online payments', emoji: 'PAY' },
-  { id: 'appointment-system', label: 'Appointment system', emoji: 'APT' },
-  { id: 'ai-solutions', label: 'AI solutions', emoji: 'AI' },
-  { id: 'seo-google-ranking', label: 'SEO / Google ranking', emoji: 'SEO' },
+  { id: 'more-customers', label: 'I need more customers', emoji: 'MC' },
+  { id: 'website', label: 'I need a website (or a better one)', emoji: 'WS' },
+  { id: 'mobile-app', label: 'I need a mobile app', emoji: 'APP' },
+  { id: 'online-booking', label: 'I want customers to book online', emoji: 'BK' },
+  { id: 'social-media-marketing', label: 'My social media isn\'t working', emoji: 'SM' },
+  { id: 'branding', label: 'My brand doesn\'t look professional', emoji: 'BR' },
+  { id: 'automation', label: 'I\'m doing too much manually', emoji: 'AU' },
+  { id: 'online-payments', label: 'I want to accept online payments', emoji: 'PAY' },
+  { id: 'appointment-system', label: 'Bookings & scheduling are a mess', emoji: 'APT' },
+  { id: 'ai-solutions', label: 'I want to use AI in my business', emoji: 'AI' },
+  { id: 'seo-google-ranking', label: 'I\'m invisible on Google', emoji: 'SEO' },
 ]
 
 export const FEATURE_OPTIONS = [
@@ -121,7 +121,6 @@ export const TIMELINE_OPTIONS = [
 ]
 
 export const BUDGET_OPTIONS = [
-  '$50 - $100',
   '$100 - $500',
   '$500 - $1,000',
   '$1,000 - $5,000',
