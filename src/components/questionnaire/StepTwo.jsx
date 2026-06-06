@@ -117,6 +117,63 @@ const DEFAULT_SUGGESTIONS = [
 ]
 
 /* ------------------------------------------------------------------ */
+/*  Follow-up question options                                         */
+/* ------------------------------------------------------------------ */
+
+const EXISTING_PROBLEMS = [
+  'Website looks outdated',
+  'Not showing up on Google',
+  'Follow-up is too manual',
+  'Social media isn\'t generating results',
+  'Can\'t accept bookings or payments online',
+  'Not sure what to fix first',
+]
+
+const CUSTOMER_GOALS = [
+  'Get more enquiries',
+  'Book appointments more easily',
+  'Trust the business faster',
+  'Contact us without friction',
+  'Pay online or complete a purchase',
+]
+
+const IMPROVE_FIRST_OPTIONS = [
+  'Website', 'Social media', 'Branding', 'SEO',
+  'Online booking', 'Online payments', 'Automation', 'Customer experience',
+]
+
+const LAUNCH_TYPE_OPTIONS = [
+  'A professional website',
+  'A mobile app',
+  'An online store',
+  'A social media presence',
+  'A booking or scheduling system',
+]
+
+const FIRST_PRIORITY_OPTIONS = [
+  'A professional website',
+  'More inquiries and leads',
+  'Simple booking or payments',
+  'A stronger brand image',
+  'Guidance on what to build first',
+]
+
+const HELP_NEEDED_OPTIONS = [
+  'Marketing', 'Design', 'Development', 'Automation', 'Strategy',
+]
+
+const ESSENTIAL_FEATURES_OPTIONS = [
+  'Contact form or inquiry system',
+  'Online booking or scheduling',
+  'Product catalog or menu',
+  'Payment processing',
+  'Photo gallery or portfolio',
+  'Customer reviews section',
+  'Live chat or chatbot',
+  'Blog or content section',
+]
+
+/* ------------------------------------------------------------------ */
 /*  Animated growth ring component                                     */
 /* ------------------------------------------------------------------ */
 
@@ -188,6 +245,43 @@ const StepTwo = ({ formData, errors, updateField, clearFieldError }) => {
   )
 
   const selectedCount = selectedIds.length
+
+  /* Online presence state & handlers */
+  const onlinePresenceStatus = formData.onlinePresenceStatus || ''
+  const existingAnswers = formData.existingPresenceAnswers || {}
+  const newAnswers = formData.newPresenceAnswers || {}
+
+  const setOnlinePresence = (value) => {
+    updateField('onlinePresenceStatus', value)
+    if (value === 'yes') {
+      updateField('newPresenceAnswers', {})
+    } else {
+      updateField('existingPresenceAnswers', {})
+    }
+    clearFieldError('onlinePresenceStatus')
+  }
+
+  const updateExistingAnswer = (field, value) => {
+    updateField('existingPresenceAnswers', { ...existingAnswers, [field]: value })
+    clearFieldError(`existing.${field}`)
+  }
+
+  const updateNewAnswer = (field, value) => {
+    updateField('newPresenceAnswers', { ...newAnswers, [field]: value })
+    clearFieldError(`new.${field}`)
+  }
+
+  const toggleExistingArray = (field, value) => {
+    const current = existingAnswers[field] || []
+    const next = current.includes(value) ? current.filter(v => v !== value) : [...current, value]
+    updateExistingAnswer(field, next)
+  }
+
+  const toggleNewArray = (field, value) => {
+    const current = newAnswers[field] || []
+    const next = current.includes(value) ? current.filter(v => v !== value) : [...current, value]
+    updateNewAnswer(field, next)
+  }
 
   return (
     <motion.div className="form-step" variants={STAGGER_CONTAINER} initial="hidden" animate="visible">
@@ -302,6 +396,263 @@ const StepTwo = ({ formData, errors, updateField, clearFieldError }) => {
             : `Great choices! We\u2019ll design a step-by-step plan to achieve this +${totalGrowth}% growth for your ${businessType || 'business'}.`}
         </p>
       </motion.div>
+
+      {/* ---- Online Presence Question ---- */}
+      <motion.div className="presence-section" variants={FADE_UP}>
+        <div className="presence-divider" />
+        <div className={`form-field ${fieldHasError(errors, 'onlinePresenceStatus') ? 'form-field--error' : ''}`}>
+          <label className="form-field__label">
+            Do you already have an online presence for your business?
+            <span className="form-field__required">*</span>
+          </label>
+          <div className="presence-options">
+            <button
+              type="button"
+              className={`presence-option ${onlinePresenceStatus === 'yes' ? 'presence-option--selected' : ''}`}
+              onClick={() => setOnlinePresence('yes')}
+              aria-pressed={onlinePresenceStatus === 'yes'}
+            >
+              <div className="presence-option__radio" />
+              <div className="presence-option__content">
+                <h4 className="presence-option__title">Yes, we already have an online presence</h4>
+                <p className="presence-option__desc">Website, app, social pages, store, or listings already exist.</p>
+              </div>
+            </button>
+            <button
+              type="button"
+              className={`presence-option ${onlinePresenceStatus === 'no' ? 'presence-option--selected' : ''}`}
+              onClick={() => setOnlinePresence('no')}
+              aria-pressed={onlinePresenceStatus === 'no'}
+            >
+              <div className="presence-option__radio" />
+              <div className="presence-option__content">
+                <h4 className="presence-option__title">No, we do not have an online presence yet</h4>
+                <p className="presence-option__desc">We are starting from scratch and need the right setup for growth.</p>
+              </div>
+            </button>
+          </div>
+          {fieldHasError(errors, 'onlinePresenceStatus') && (
+            <span className="form-field__error">{getFieldError(errors, 'onlinePresenceStatus')}</span>
+          )}
+        </div>
+      </motion.div>
+
+      {/* ---- Follow-up: Existing Presence ---- */}
+      <AnimatePresence>
+        {onlinePresenceStatus === 'yes' && (
+          <motion.div
+            key="existing-followup"
+            className="followup-section"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className={`form-field ${fieldHasError(errors, 'existing.biggestProblem') ? 'form-field--error' : ''}`}>
+              <label className="form-field__label">
+                What are the biggest problems with your current online presence?
+                <span className="form-field__required">*</span>
+              </label>
+              <div className="followup-chips">
+                {EXISTING_PROBLEMS.map((opt) => {
+                  const active = (existingAnswers.biggestProblem || []).includes(opt)
+                  return (
+                    <button
+                      key={opt}
+                      type="button"
+                      className={`followup-chip ${active ? 'followup-chip--selected' : ''}`}
+                      onClick={() => toggleExistingArray('biggestProblem', opt)}
+                      aria-pressed={active}
+                    >
+                      {active && <CheckCircle2 size={13} />}
+                      {opt}
+                    </button>
+                  )
+                })}
+              </div>
+              {fieldHasError(errors, 'existing.biggestProblem') && (
+                <span className="form-field__error">{getFieldError(errors, 'existing.biggestProblem')}</span>
+              )}
+            </div>
+
+            <div className={`form-field ${fieldHasError(errors, 'existing.customerGoal') ? 'form-field--error' : ''}`}>
+              <label className="form-field__label">
+                What should your customers be able to do more easily?
+                <span className="form-field__required">*</span>
+              </label>
+              <div className="followup-chips">
+                {CUSTOMER_GOALS.map((opt) => {
+                  const active = existingAnswers.customerGoal === opt
+                  return (
+                    <button
+                      key={opt}
+                      type="button"
+                      className={`followup-chip ${active ? 'followup-chip--selected' : ''}`}
+                      onClick={() => updateExistingAnswer('customerGoal', opt)}
+                      aria-pressed={active}
+                    >
+                      {active && <CheckCircle2 size={13} />}
+                      {opt}
+                    </button>
+                  )
+                })}
+              </div>
+              {fieldHasError(errors, 'existing.customerGoal') && (
+                <span className="form-field__error">{getFieldError(errors, 'existing.customerGoal')}</span>
+              )}
+            </div>
+
+            <div className={`form-field ${fieldHasError(errors, 'existing.improveFirst') ? 'form-field--error' : ''}`}>
+              <label className="form-field__label">
+                What do you want to improve first?
+                <span className="form-field__required">*</span>
+              </label>
+              <div className="followup-chips">
+                {IMPROVE_FIRST_OPTIONS.map((opt) => {
+                  const active = (existingAnswers.improveFirst || []).includes(opt)
+                  return (
+                    <button
+                      key={opt}
+                      type="button"
+                      className={`followup-chip ${active ? 'followup-chip--selected' : ''}`}
+                      onClick={() => toggleExistingArray('improveFirst', opt)}
+                      aria-pressed={active}
+                    >
+                      {active && <CheckCircle2 size={13} />}
+                      {opt}
+                    </button>
+                  )
+                })}
+              </div>
+              {fieldHasError(errors, 'existing.improveFirst') && (
+                <span className="form-field__error">{getFieldError(errors, 'existing.improveFirst')}</span>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ---- Follow-up: New Presence ---- */}
+      <AnimatePresence>
+        {onlinePresenceStatus === 'no' && (
+          <motion.div
+            key="new-followup"
+            className="followup-section"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className={`form-field ${fieldHasError(errors, 'new.launchType') ? 'form-field--error' : ''}`}>
+              <label className="form-field__label">
+                What do you want to launch first?
+                <span className="form-field__required">*</span>
+              </label>
+              <div className="followup-chips">
+                {LAUNCH_TYPE_OPTIONS.map((opt) => {
+                  const active = newAnswers.launchType === opt
+                  return (
+                    <button
+                      key={opt}
+                      type="button"
+                      className={`followup-chip ${active ? 'followup-chip--selected' : ''}`}
+                      onClick={() => updateNewAnswer('launchType', opt)}
+                      aria-pressed={active}
+                    >
+                      {active && <CheckCircle2 size={13} />}
+                      {opt}
+                    </button>
+                  )
+                })}
+              </div>
+              {fieldHasError(errors, 'new.launchType') && (
+                <span className="form-field__error">{getFieldError(errors, 'new.launchType')}</span>
+              )}
+            </div>
+
+            <div className={`form-field ${fieldHasError(errors, 'new.firstPriority') ? 'form-field--error' : ''}`}>
+              <label className="form-field__label">
+                What is your most important priority right now?
+                <span className="form-field__required">*</span>
+              </label>
+              <div className="followup-chips">
+                {FIRST_PRIORITY_OPTIONS.map((opt) => {
+                  const active = newAnswers.firstPriority === opt
+                  return (
+                    <button
+                      key={opt}
+                      type="button"
+                      className={`followup-chip ${active ? 'followup-chip--selected' : ''}`}
+                      onClick={() => updateNewAnswer('firstPriority', opt)}
+                      aria-pressed={active}
+                    >
+                      {active && <CheckCircle2 size={13} />}
+                      {opt}
+                    </button>
+                  )
+                })}
+              </div>
+              {fieldHasError(errors, 'new.firstPriority') && (
+                <span className="form-field__error">{getFieldError(errors, 'new.firstPriority')}</span>
+              )}
+            </div>
+
+            <div className={`form-field ${fieldHasError(errors, 'new.helpNeeded') ? 'form-field--error' : ''}`}>
+              <label className="form-field__label">
+                What kind of help do you need from us?
+                <span className="form-field__required">*</span>
+              </label>
+              <div className="followup-chips">
+                {HELP_NEEDED_OPTIONS.map((opt) => {
+                  const active = (newAnswers.helpNeeded || []).includes(opt)
+                  return (
+                    <button
+                      key={opt}
+                      type="button"
+                      className={`followup-chip ${active ? 'followup-chip--selected' : ''}`}
+                      onClick={() => toggleNewArray('helpNeeded', opt)}
+                      aria-pressed={active}
+                    >
+                      {active && <CheckCircle2 size={13} />}
+                      {opt}
+                    </button>
+                  )
+                })}
+              </div>
+              {fieldHasError(errors, 'new.helpNeeded') && (
+                <span className="form-field__error">{getFieldError(errors, 'new.helpNeeded')}</span>
+              )}
+            </div>
+
+            <div className={`form-field ${fieldHasError(errors, 'new.essentialFeatures') ? 'form-field--error' : ''}`}>
+              <label className="form-field__label">
+                What features are essential for your first version?
+                <span className="form-field__required">*</span>
+              </label>
+              <div className="followup-chips">
+                {ESSENTIAL_FEATURES_OPTIONS.map((opt) => {
+                  const active = (newAnswers.essentialFeatures || []).includes(opt)
+                  return (
+                    <button
+                      key={opt}
+                      type="button"
+                      className={`followup-chip ${active ? 'followup-chip--selected' : ''}`}
+                      onClick={() => toggleNewArray('essentialFeatures', opt)}
+                      aria-pressed={active}
+                    >
+                      {active && <CheckCircle2 size={13} />}
+                      {opt}
+                    </button>
+                  )
+                })}
+              </div>
+              {fieldHasError(errors, 'new.essentialFeatures') && (
+                <span className="form-field__error">{getFieldError(errors, 'new.essentialFeatures')}</span>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   )
 }
@@ -547,6 +898,137 @@ style.textContent = `
   }
   .growth-total-banner__left {
     flex-direction: column;
+  }
+}
+
+/* ---- Online Presence Section ---- */
+.presence-section {
+  margin-top: var(--space-6);
+}
+.presence-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border), transparent);
+  margin-bottom: var(--space-6);
+}
+.presence-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+.presence-option {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: color-mix(in srgb, var(--color-bg-white) 92%, var(--color-bg-subtle) 8%);
+  border: 1.5px solid var(--color-border);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  text-align: left;
+}
+.presence-option:hover {
+  border-color: rgba(34, 182, 255, 0.4);
+  box-shadow: 0 4px 20px rgba(34, 182, 255, 0.08);
+}
+.presence-option--selected {
+  border-color: var(--color-gold) !important;
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.06) 0%, rgba(34, 182, 255, 0.03) 100%) !important;
+  box-shadow: 0 4px 24px rgba(245, 158, 11, 0.10) !important;
+}
+.presence-option__radio {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all 0.25s ease;
+  position: relative;
+}
+.presence-option--selected .presence-option__radio {
+  border-color: var(--color-gold);
+}
+.presence-option--selected .presence-option__radio::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--color-gold);
+}
+.presence-option__content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.presence-option__title {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.4;
+}
+.presence-option__desc {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ---- Follow-up Section ---- */
+.followup-section {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+.followup-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+.followup-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  background: color-mix(in srgb, var(--color-bg-white) 92%, var(--color-bg-subtle) 8%);
+  border: 1.5px solid var(--color-border);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+}
+.followup-chip:hover {
+  border-color: rgba(34, 182, 255, 0.4);
+  color: var(--color-text-primary);
+  box-shadow: 0 2px 12px rgba(34, 182, 255, 0.08);
+}
+.followup-chip--selected {
+  border-color: var(--color-gold) !important;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.10) 0%, rgba(245, 158, 11, 0.04) 100%) !important;
+  color: #f59e0b !important;
+  box-shadow: 0 2px 12px rgba(245, 158, 11, 0.10) !important;
+}
+.followup-chip--selected svg {
+  color: #f59e0b;
+}
+@media (max-width: 640px) {
+  .presence-option {
+    padding: var(--space-4);
+    gap: var(--space-3);
+  }
+  .followup-chip {
+    padding: 8px 14px;
+    font-size: 0.72rem;
   }
 }
 `

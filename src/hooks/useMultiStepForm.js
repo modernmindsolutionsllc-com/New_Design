@@ -25,6 +25,9 @@ const INITIAL_FORM_DATA = {
   bestTime: '',
   file: null,
   additionalNotes: '',
+  onlinePresenceStatus: '',
+  existingPresenceAnswers: {},
+  newPresenceAnswers: {},
 }
 
 export const useMultiStepForm = () => {

@@ -102,6 +102,21 @@ export const validateStep2 = (data) => {
   const errors = {}
   const growthResult = validateCheckboxGroup(data.growthSelections, 'Please select at least one growth area to continue.')
   if (!growthResult.valid) errors.growthSelections = growthResult.message
+
+  const presenceResult = validateRequired(data.onlinePresenceStatus, 'Please select whether you have an online presence')
+  if (!presenceResult.valid) {
+    errors.onlinePresenceStatus = presenceResult.message
+  } else if (data.onlinePresenceStatus === 'yes') {
+    validateBranchArray(errors, 'existing', data.existingPresenceAnswers, 'biggestProblem', 'Please select at least one problem')
+    validateBranchRequired(errors, 'existing', data.existingPresenceAnswers, 'customerGoal', 'Please select what customers should do more easily')
+    validateBranchArray(errors, 'existing', data.existingPresenceAnswers, 'improveFirst', 'Please select at least one area to improve')
+  } else if (data.onlinePresenceStatus === 'no') {
+    validateBranchRequired(errors, 'new', data.newPresenceAnswers, 'launchType', 'Please select what you want to launch first')
+    validateBranchRequired(errors, 'new', data.newPresenceAnswers, 'firstPriority', 'Please select your most important priority')
+    validateBranchArray(errors, 'new', data.newPresenceAnswers, 'helpNeeded', 'Please select at least one type of help')
+    validateBranchArray(errors, 'new', data.newPresenceAnswers, 'essentialFeatures', 'Please select at least one essential feature')
+  }
+
   return errors
 }
 
