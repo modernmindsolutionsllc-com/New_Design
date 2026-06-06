@@ -30,9 +30,6 @@ const CTABanner = () => {
             <Link to="/start-project" className="btn btn--primary btn--lg cta-banner__primary">
               Start My Business Journey <ArrowRight size={18} />
             </Link>
-            <Link to="/contact" className="btn btn--ghost btn--lg cta-banner__secondary">
-              Get Free Consultation
-            </Link>
           </motion.div>
         </motion.div>
       </div>
@@ -110,20 +107,6 @@ style.textContent = `
   background: var(--color-gold-dark);
   border-color: var(--color-gold-dark);
   box-shadow: var(--shadow-gold);
-}
-.cta-banner__secondary {
-  border: 2px solid var(--color-border);
-  color: var(--color-text-primary);
-  background: transparent;
-  padding: 0.875rem 2rem;
-  border-radius: var(--radius-full);
-  font-weight: 600;
-  text-decoration: none;
-  transition: var(--transition-base);
-}
-.cta-banner__secondary:hover {
-  border-color: var(--color-gold);
-  color: var(--color-gold);
 }
 `
 if (!document.head.querySelector('[data-cta-styles]')) {

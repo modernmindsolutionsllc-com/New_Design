@@ -5,7 +5,7 @@ import QuestionnaireForm from '@components/questionnaire/QuestionnaireForm'
 import { FADE_UP, STAGGER_CONTAINER, CONTACT_EMAIL } from '@utils/constants'
 
 const REASSURANCES = [
-  { icon: Clock, text: 'We operate 24*7.' },
+  { icon: Clock, text: 'We reply as soon as possible and operate 24/7.' },
   { icon: Shield, text: 'Your information stays private and secure.' },
   { icon: Sparkles, text: 'Beginner-friendly process, no technical pressure.' },
 ]
@@ -83,7 +83,7 @@ const StartProjectPage = () => {
                 <h3 className="sidebar-card__heading">What happens next?</h3>
                 <ol className="sidebar-card__steps">
                   {[
-                    { num: '01', title: 'We review your brief', sub: 'Usually within a few hours.' },
+                    { num: '01', title: 'We review your brief', sub: 'As soon as possible, any time of day.' },
                     { num: '02', title: 'We map out your best-fit solution', sub: 'Clear recommendations based on your business goals.' },
                     { num: '03', title: 'We share the next steps', sub: 'Scope, timeline, and consultation options in plain language.' },
                     { num: '04', title: 'We start building momentum', sub: 'Delivery begins once you feel confident about the plan.' },

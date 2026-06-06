@@ -29,7 +29,6 @@ const HeroSection = () => (
         </motion.p>
         <motion.div className="hero__actions" variants={FADE_UP}>
           <Link to="/start-project" className="btn btn--primary btn--lg hero__cta-primary">Start My Business Journey<ArrowRight size={18} /></Link>
-          <Link to="/start-project" className="btn btn--ghost btn--lg hero__cta-secondary">Find What My Business Needs</Link>
         </motion.div>
         <motion.ul className="hero__highlights" variants={FADE_UP}>
           <li className="hero__highlight-item"><MessageSquareText size={16} /><span>Plain-language guidance</span></li>
@@ -113,7 +112,6 @@ style.textContent = `
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
 .hero__cta-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%); color: var(--color-bg-dark); border-color: var(--color-gold); font-weight: 700; font-size: var(--text-base); padding: 0.9rem 1.8rem; border-radius: var(--radius-full); transition: var(--transition-base); text-decoration: none; border: 1px solid color-mix(in srgb, var(--color-gold-dark) 75%, black 25%); }
 .hero__cta-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-gold); }
-.hero__cta-secondary { border-radius: var(--radius-full); }
 .hero__highlights { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-3); }
 .hero__highlight-item { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.48rem 0.82rem; border-radius: var(--radius-full); font-size: var(--text-xs); font-weight: 600; color: var(--color-text-primary); background: color-mix(in srgb, var(--color-bg-white) 78%, transparent 22%); border: 1px solid color-mix(in srgb, var(--color-border) 86%, transparent 14%); }
 .hero__highlight-item svg { color: var(--color-gold); }
