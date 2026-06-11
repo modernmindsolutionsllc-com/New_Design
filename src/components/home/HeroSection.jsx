@@ -87,12 +87,7 @@ const HeroSection = () => (
       </motion.div>
     </div>
 
-    <div className="hero__logos">
-      <div className="container">
-        <p className="hero__logos-label">BUSINESS GOALS WE HELP WITH</p>
-        <div className="hero__logos-row">{['More Customers', 'Professional Presence', 'Bookings', 'Payments', 'Automation', 'Apps'].map((name) => <div key={name} className="hero__logo-item">{name}</div>)}</div>
-      </div>
-    </div>
+
   </section>
 )
 
@@ -243,8 +238,8 @@ style.textContent = `
 .hero__logos-row { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-8); align-items: center; }
 .hero__logo-item { font-family: var(--font-display); font-weight: 700; font-size: var(--text-lg); color: color-mix(in srgb, var(--color-border) 82%, var(--color-text-muted) 18%); letter-spacing: -0.02em; transition: var(--transition-base); }
 .hero__logo-item:hover { color: var(--color-text-muted); }
-@media (max-width: 900px) { .hero__inner { grid-template-columns: 1fr; gap: var(--space-12); } .hero__visual { display: none; } }
-@media (max-width: 600px) { .hero { padding-top: calc(var(--navbar-height) + var(--space-8)); } .hero__actions { flex-direction: column; align-items: flex-start; } .hero__heading { max-width: 100%; } }
+@media (max-width: 900px) { .hero { min-height: auto; padding-bottom: var(--space-16); } .hero__inner { grid-template-columns: 1fr; gap: var(--space-12); } .hero__visual { display: none; } }
+@media (max-width: 600px) { .hero { padding-top: calc(var(--navbar-height) + var(--space-8)); min-height: auto; } .hero__actions { flex-direction: column; align-items: flex-start; } .hero__heading { max-width: 100%; } }
 `
 if (!document.head.querySelector('[data-hero-styles]')) {
   style.setAttribute('data-hero-styles', '')
