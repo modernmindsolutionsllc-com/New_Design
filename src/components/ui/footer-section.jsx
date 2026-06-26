@@ -7,6 +7,7 @@ import {
   Mail,
   MessageCircle,
   Music2,
+  Phone,
   Twitter,
   Youtube,
 } from 'lucide-react'
@@ -15,6 +16,8 @@ import {
   COMPANY_NAME,
   COMPANY_TAGLINE,
   CONTACT_EMAIL,
+  CONTACT_PHONE,
+  CONTACT_PHONE_HREF,
   SOCIAL_LINKS,
 } from '@utils/constants'
 import logo from '@assets/images/logo.png'
@@ -58,6 +61,7 @@ const footerLinks = [
       { title: 'TikTok', href: SOCIAL_LINKS.tiktok, icon: Music2, external: true },
       { title: 'Threads', href: SOCIAL_LINKS.threads, icon: MessageCircle, external: true },
       { title: 'YouTube', href: SOCIAL_LINKS.youtube, icon: Youtube, external: true },
+      { title: CONTACT_PHONE, href: CONTACT_PHONE_HREF, icon: Phone, external: true },
       { title: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}`, icon: Mail, external: true },
     ],
   },
@@ -66,6 +70,7 @@ const footerLinks = [
 function FooterLink({ link }) {
   const { title, href, icon: Icon, external } = link
   const className = 'footer-section__link'
+  const isContactLink = href.startsWith('mailto:') || href.startsWith('tel:')
 
   const content = (
     <>
@@ -74,13 +79,13 @@ function FooterLink({ link }) {
     </>
   )
 
-  if (external || href.startsWith('mailto:')) {
+  if (external || isContactLink) {
     return (
       <a
         href={href}
         className={className}
-        target={href.startsWith('mailto:') ? undefined : '_blank'}
-        rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+        target={isContactLink ? undefined : '_blank'}
+        rel={isContactLink ? undefined : 'noopener noreferrer'}
       >
         {content}
       </a>
@@ -133,6 +138,11 @@ export function FooterSection() {
             </Link>
             <p className="footer-section__tagline">{COMPANY_TAGLINE}</p>
             <p className="footer-section__contact-meta">{COMPANY_ADDRESS}</p>
+            <p className="footer-section__contact-meta">
+              <a href={CONTACT_PHONE_HREF} className="footer-section__meta-link">
+                {CONTACT_PHONE}
+              </a>
+            </p>
             <p className="footer-section__contact-meta">
               We help businesses identify what they need, build it, and grow with it.
             </p>

@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Globe, MapPin, Send, Loader2, CalendarCheck2 } from 'lucide-react'
+import { Mail, Globe, MapPin, Send, Loader2, CalendarCheck2, Phone } from 'lucide-react'
 import {
   CONTACT_EMAIL,
+  CONTACT_PHONE,
+  CONTACT_PHONE_HREF,
   STAGGER_CONTAINER,
   FADE_UP,
 } from '@utils/constants'
@@ -11,6 +13,7 @@ import { submitToFormspree } from '@components/questionnaire/formspreeConfig'
 
 const CONTACT_METHODS = [
   { icon: Mail, label: 'Email', value: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
+  { icon: Phone, label: 'Phone', value: CONTACT_PHONE, href: CONTACT_PHONE_HREF },
   { icon: Globe, label: 'Company', value: 'Modern Mind Solutions LLC', href: null },
   { icon: MapPin, label: 'Boston', value: 'Boston, Massachusetts, US', href: null },
   { icon: MapPin, label: 'Ahmedabad', value: 'Ahmedabad, Gujarat', href: null },

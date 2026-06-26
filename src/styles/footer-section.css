@@ -167,3 +167,13 @@
   line-height: 1.6;
 }
 
+.footer-section__meta-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section__meta-link:hover {
+  color: var(--color-text-inverse);
+}
+

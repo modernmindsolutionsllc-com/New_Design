@@ -1,8 +1,14 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Clock, Shield, Sparkles } from 'lucide-react'
+import { Clock, Phone, Shield, Sparkles } from 'lucide-react'
 import QuestionnaireForm from '@components/questionnaire/QuestionnaireForm'
-import { FADE_UP, STAGGER_CONTAINER, CONTACT_EMAIL } from '@utils/constants'
+import {
+  FADE_UP,
+  STAGGER_CONTAINER,
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  CONTACT_PHONE_HREF,
+} from '@utils/constants'
 
 const REASSURANCES = [
   { icon: Clock, text: 'We reply as soon as possible and operate 24/7.' },
@@ -119,6 +125,10 @@ const StartProjectPage = () => {
                   You can skip the form and contact us directly if you already know you want to talk.
                 </p>
                 <div className="sidebar-card__contacts">
+                  <a href={CONTACT_PHONE_HREF} className="sidebar-card__contact-btn sidebar-card__contact-btn--phone">
+                    <Phone size={16} aria-hidden />
+                    Call {CONTACT_PHONE}
+                  </a>
                   <a href={`mailto:${CONTACT_EMAIL}`} className="sidebar-card__contact-btn sidebar-card__contact-btn--email">
                     Send an Email
                   </a>
@@ -373,6 +383,16 @@ style.textContent = `
   background: var(--color-bg-subtle);
   border: 1.5px solid var(--color-border);
   color: var(--color-text-secondary);
+}
+.sidebar-card__contact-btn--phone {
+  background: var(--color-gold);
+  border: 1.5px solid var(--color-gold);
+  color: var(--color-bg-dark);
+}
+.sidebar-card__contact-btn--phone:hover {
+  background: var(--color-gold-dark);
+  border-color: var(--color-gold-dark);
+  box-shadow: var(--shadow-gold);
 }
 .sidebar-card__contact-btn--email:hover {
   border-color: var(--color-gold-border);

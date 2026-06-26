@@ -7,7 +7,10 @@ export const CONTACT_EMAIL =
   import.meta.env.VITE_CONTACT_EMAIL || 'info@modernmindsolutionsllc.com'
 
 export const CONTACT_PHONE =
-  import.meta.env.VITE_CONTACT_PHONE || '+1 (000) 000-0000'
+  import.meta.env.VITE_CONTACT_PHONE || '+1 (857) 666-1861'
+
+export const CONTACT_PHONE_HREF =
+  import.meta.env.VITE_CONTACT_PHONE_HREF || 'tel:+18576661861'
 
 export const COMPANY_ADDRESS = 'Boston, Massachusetts, US \u00b7 Ahmedabad, Gujarat, India'
 
